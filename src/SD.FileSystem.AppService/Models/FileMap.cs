@@ -1,8 +1,7 @@
-﻿using SD.FileSystem.AppService.Models;
-using SD.FileSystem.Domain.Entities;
+﻿using SD.FileSystem.Domain.Entities;
 using SD.Toolkits.Mapper;
 
-namespace SD.FileSystem.AppService.Maps
+namespace SD.FileSystem.AppService.Models
 {
     /// <summary>
     /// 文件映射工具类

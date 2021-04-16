@@ -210,7 +210,7 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
-    <Compile Include="Maps\FileMap.cs" />
+    <Compile Include="Models\FileMap.cs" />
     <Compile Include="Models\FileInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
