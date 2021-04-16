@@ -1,8 +1,6 @@
-﻿using Microsoft.Owin;
-using Microsoft.Owin.FileSystems;
+﻿using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
 using Owin;
-using SD.FileSystem.AppService;
 using SD.IdentitySystem.WebApi.Authentication.Filters;
 using SD.Infrastructure.WebApi.SelfHost.Server.Middlewares;
 using SD.IOC.Integration.WebApi.SelfHost;
@@ -17,7 +15,6 @@ using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-[assembly: OwinStartup(typeof(Startup))]
 namespace SD.FileSystem.AppService
 {
     /// <summary>
