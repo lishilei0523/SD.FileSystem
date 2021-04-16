@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\SD.FileSystem.AppService.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
@@ -233,6 +236,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="Views\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
