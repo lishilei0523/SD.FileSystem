@@ -111,8 +111,12 @@ namespace SD.FileSystem.AppService.Controllers
         {
             File file = this._unitOfWork.Resolve<File>(fileId);
 
-            //同时删除物理文件
-            System.IO.File.Delete(file.AbsolutePath);
+            //判断哈希
+            if (this._fileRepository.CountByHash(file.HashValue) == 1)
+            {
+                //删除物理文件
+                System.IO.File.Delete(file.AbsolutePath);
+            }
 
             this._unitOfWork.RegisterPhysicsRemove(file);
             this._unitOfWork.Commit();
@@ -141,8 +145,13 @@ namespace SD.FileSystem.AppService.Controllers
             ICollection<File> files = this._unitOfWork.ResolveRange<File>(fileIds);
             foreach (File file in files)
             {
-                //同时删除物理文件
-                System.IO.File.Delete(file.AbsolutePath);
+                //判断哈希
+                if (this._fileRepository.CountByHash(file.HashValue) == 1)
+                {
+                    //删除物理文件
+                    System.IO.File.Delete(file.AbsolutePath);
+                }
+
                 this._unitOfWork.RegisterPhysicsRemove(file);
             }
 
@@ -175,6 +184,7 @@ namespace SD.FileSystem.AppService.Controllers
         /// </summary>
         /// <param name="keywords">关键字</param>
         /// <param name="extensionName">扩展名</param>
+        /// <param name="hashValue">哈希值</param>
         /// <param name="uploadedDate">上传日期</param>
         /// <param name="startTime">开始时间</param>
         /// <param name="endTime">结束时间</param>
@@ -182,9 +192,9 @@ namespace SD.FileSystem.AppService.Controllers
         /// <param name="pageSize">页容量</param>
         /// <returns>文件列表</returns>
         [HttpGet]
-        public PageModel<FileInfo> GetFilesByPage(string keywords, string extensionName, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize)
+        public PageModel<FileInfo> GetFilesByPage(string keywords, string extensionName, string hashValue, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize)
         {
-            ICollection<File> files = this._fileRepository.FindByPage(keywords, extensionName, uploadedDate, startTime, endTime, pageIndex, pageSize, out int rowCount, out int pageCount);
+            ICollection<File> files = this._fileRepository.FindByPage(keywords, extensionName, hashValue, uploadedDate, startTime, endTime, pageIndex, pageSize, out int rowCount, out int pageCount);
             IEnumerable<FileInfo> fileInfos = files.Select(x => x.ToDTO());
 
             return new PageModel<FileInfo>(fileInfos, pageIndex, pageSize, pageCount, rowCount);

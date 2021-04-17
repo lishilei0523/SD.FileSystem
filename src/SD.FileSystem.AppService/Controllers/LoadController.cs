@@ -91,7 +91,7 @@ namespace SD.FileSystem.AppService.Controllers
             string hashValue = formFile.Datas.ToMD5();
 
             //哈希值比对
-            File existedFile = this._fileRepository.SingleByHash(hashValue);
+            File existedFile = this._fileRepository.DefaultByHash(hashValue);
             if (existedFile != null)
             {
                 file.Save(existedFile.RelativePath, existedFile.AbsolutePath, existedFile.HostName, existedFile.Url, hashValue);
@@ -157,7 +157,7 @@ namespace SD.FileSystem.AppService.Controllers
                 string hashValue = formFile.Datas.ToMD5();
 
                 //哈希值比对
-                File existedFile = this._fileRepository.SingleByHash(hashValue);
+                File existedFile = this._fileRepository.DefaultByHash(hashValue);
                 if (existedFile != null)
                 {
                     file.Save(existedFile.RelativePath, existedFile.AbsolutePath, existedFile.HostName, existedFile.Url, hashValue);
