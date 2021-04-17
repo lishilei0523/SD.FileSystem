@@ -13,6 +13,21 @@ namespace SD.FileSystem.Repository.Implements
     /// </summary>
     public class FileRepository : EFAggRootRepositoryProvider<File>, IFileRepository
     {
+        #region # 根据哈希值获取文件 —— File SingleByHash(string hashValue)
+        /// <summary>
+        /// 根据哈希值获取文件
+        /// </summary>
+        /// <param name="hashValue">哈希值</param>
+        /// <returns>文件</returns>
+        /// <remarks>如果无，则返回null</remarks>
+        public File SingleByHash(string hashValue)
+        {
+            File file = base.SingleOrDefault(x => x.HashValue == hashValue);
+
+            return file;
+        }
+        #endregion
+
         #region # 分页获取文件列表 —— ICollection<File> FindByPage(string keywords, string extensionName...
         /// <summary>
         /// 分页获取文件列表

@@ -90,8 +90,17 @@ namespace SD.FileSystem.AppService.Controllers
             string fileUrl = $"{hostName}/{relativePath}";
             string hashValue = formFile.Datas.ToMD5();
 
-            System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
-            file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
+            //哈希值比对
+            File existedFile = this._fileRepository.SingleByHash(hashValue);
+            if (existedFile != null)
+            {
+                file.Save(existedFile.RelativePath, existedFile.AbsolutePath, existedFile.HostName, existedFile.Url, hashValue);
+            }
+            else
+            {
+                System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
+                file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
+            }
 
             this._unitOfWork.RegisterAdd(file);
             this._unitOfWork.Commit();
@@ -147,8 +156,17 @@ namespace SD.FileSystem.AppService.Controllers
                 string fileUrl = $"{hostName}/{relativePath}";
                 string hashValue = formFile.Datas.ToMD5();
 
-                System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
-                file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
+                //哈希值比对
+                File existedFile = this._fileRepository.SingleByHash(hashValue);
+                if (existedFile != null)
+                {
+                    file.Save(existedFile.RelativePath, existedFile.AbsolutePath, existedFile.HostName, existedFile.Url, hashValue);
+                }
+                else
+                {
+                    System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
+                    file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
+                }
 
                 files.Add(file);
             }
