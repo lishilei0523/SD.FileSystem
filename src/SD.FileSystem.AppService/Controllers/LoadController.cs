@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using File = SD.FileSystem.Domain.Entities.File;
 using FileInfo = SD.FileSystem.AppService.Models.FileInfo;
@@ -46,7 +47,7 @@ namespace SD.FileSystem.AppService.Controllers
         #endregion
 
 
-        //Public
+        //命令部分
 
         #region # 上传文件 —— FileInfo UploadFile(string use, string description...
         /// <summary>
@@ -122,6 +123,39 @@ namespace SD.FileSystem.AppService.Controllers
             IEnumerable<FileInfo> fileInfos = files.Select(x => x.ToDTO());
 
             return fileInfos;
+        }
+        #endregion
+
+
+        //查询部分
+
+        #region # 下载文件 —— IHttpActionResult DownloadFile(string hashValue)
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="hashValue">哈希值</param>
+        /// <returns>文件数据</returns>
+        [HttpGet]
+        public IHttpActionResult DownloadFile(string hashValue)
+        {
+            File file = this._fileRepository.DefaultByHash(hashValue);
+            byte[] buffer = System.IO.File.ReadAllBytes(file.AbsolutePath);
+
+            const string contentType = "application/octet-stream";
+            const string dispositionType = "attachment";
+            HttpContent httpContent = new ByteArrayContent(buffer);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
+            httpContent.Headers.ContentDisposition = new ContentDispositionHeaderValue(dispositionType)
+            {
+                FileName = file.Name,
+                Size = file.Size
+            };
+            HttpResponseMessage httpResponse = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = httpContent
+            };
+
+            return base.ResponseMessage(httpResponse);
         }
         #endregion
 
