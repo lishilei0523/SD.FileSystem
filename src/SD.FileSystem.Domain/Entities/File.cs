@@ -25,18 +25,18 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="fileName">文件名称</param>
         /// <param name="extensionName">扩展名</param>
         /// <param name="size">文件大小</param>
-        /// <param name="use">用途</param>
         /// <param name="uploadedDate">上传日期</param>
+        /// <param name="use">用途</param>
         /// <param name="description">描述</param>
-        public File(string fileName, string extensionName, long size, string use, DateTime uploadedDate, string description)
+        public File(string fileName, string extensionName, long size, DateTime uploadedDate, string use, string description)
             : this()
         {
             base.Number = $"{base.Id}{extensionName}";
             base.Name = fileName;
             this.ExtensionName = extensionName;
             this.Size = size;
-            this.Use = use;
             this.UploadedDate = uploadedDate.Date;
+            this.Use = use;
             this.Description = description;
 
             //初始化关键字
@@ -90,11 +90,11 @@ namespace SD.FileSystem.Domain.Entities
         public string Url { get; private set; }
         #endregion
 
-        #region 用途 —— string Use
+        #region 哈希值 —— string HashValue
         /// <summary>
-        /// 用途
+        /// 哈希值
         /// </summary>
-        public string Use { get; private set; }
+        public string HashValue { get; private set; }
         #endregion
 
         #region 上传日期 —— DateTime UploadedDate
@@ -102,6 +102,13 @@ namespace SD.FileSystem.Domain.Entities
         /// 上传日期
         /// </summary>
         public DateTime UploadedDate { get; private set; }
+        #endregion
+
+        #region 用途 —— string Use
+        /// <summary>
+        /// 用途
+        /// </summary>
+        public string Use { get; private set; }
         #endregion
 
         #region 描述 —— string Description
@@ -123,12 +130,14 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="absolutePath">绝对路径</param>
         /// <param name="hostName">主机名称</param>
         /// <param name="url">链接地址</param>
-        public void Save(string relativePath, string absolutePath, string hostName, string url)
+        /// <param name="hashValue">哈希值</param>
+        public void Save(string relativePath, string absolutePath, string hostName, string url, string hashValue)
         {
             this.RelativePath = relativePath;
             this.AbsolutePath = absolutePath;
             this.HostName = hostName;
             this.Url = url;
+            this.HashValue = hashValue;
 
             //初始化关键字
             this.InitKeywords();
@@ -146,10 +155,11 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="absolutePath">绝对路径</param>
         /// <param name="hostName">主机名称</param>
         /// <param name="url">链接地址</param>
-        /// <param name="use">用途</param>
+        /// <param name="hashValue">哈希值</param>
         /// <param name="uploadedDate">上传日期</param>
+        /// <param name="use">用途</param>
         /// <param name="description">描述</param>
-        public void UpdateInfo(string fileName, string extensionName, long size, string relativePath, string absolutePath, string hostName, string url, string use, DateTime uploadedDate, string description)
+        public void UpdateInfo(string fileName, string extensionName, long size, string relativePath, string absolutePath, string hostName, string url, string hashValue, DateTime uploadedDate, string use, string description)
         {
             base.Number = $"{base.Id}{extensionName}";
             base.Name = fileName;
@@ -159,8 +169,9 @@ namespace SD.FileSystem.Domain.Entities
             this.AbsolutePath = absolutePath;
             this.HostName = hostName;
             this.Url = url;
-            this.Use = use;
+            this.HashValue = hashValue;
             this.UploadedDate = uploadedDate.Date;
+            this.Use = use;
             this.Description = description;
 
             //初始化关键字

@@ -1,4 +1,5 @@
-﻿using SD.FileSystem.AppService.Models;
+﻿using SD.Common;
+using SD.FileSystem.AppService.Models;
 using SD.FileSystem.Domain.IRepositories;
 using SD.Toolkits.AspNet;
 using SD.Toolkits.AspNet.Configurations;
@@ -76,7 +77,7 @@ namespace SD.FileSystem.AppService.Controllers
             string extensionName = Path.GetExtension(formFile.FileName);
             long size = formFile.ContentLength;
             DateTime uploadedDate = DateTime.Today;
-            File file = new File(fileName, extensionName, size, use, uploadedDate, description);
+            File file = new File(fileName, extensionName, size, uploadedDate, use, description);
 
             string timestamp = uploadedDate.ToString("yyyyMMdd");
             string fileServerPath = AspNetSection.Setting.FileServer.Path;
@@ -87,9 +88,10 @@ namespace SD.FileSystem.AppService.Controllers
             string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
             string hostName = this.GetHostName();
             string fileUrl = $"{hostName}/{relativePath}";
+            string hashValue = formFile.Datas.ToMD5();
 
             System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
-            file.Save(relativePath, absolutePath, hostName, fileUrl);
+            file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
 
             this._unitOfWork.RegisterAdd(file);
             this._unitOfWork.Commit();
@@ -138,14 +140,15 @@ namespace SD.FileSystem.AppService.Controllers
                 string fileName = formFile.FileName;
                 string extensionName = Path.GetExtension(formFile.FileName);
                 long size = formFile.ContentLength;
-                File file = new File(fileName, extensionName, size, use, uploadedDate, description);
+                File file = new File(fileName, extensionName, size, uploadedDate, use, description);
 
                 string relativePath = $"{timestamp}/{file.Number}";
                 string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
                 string fileUrl = $"{hostName}/{relativePath}";
+                string hashValue = formFile.Datas.ToMD5();
 
                 System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
-                file.Save(relativePath, absolutePath, hostName, fileUrl);
+                file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
 
                 files.Add(file);
             }

@@ -58,16 +58,22 @@ namespace SD.FileSystem.AppService.Models
         public string Url;
 
         /// <summary>
-        /// 用途
+        /// 哈希值
         /// </summary>
         [DataMember]
-        public string Use;
+        public string HashValue;
 
         /// <summary>
         /// 上传日期
         /// </summary>
         [DataMember]
         public DateTime UploadedDate;
+
+        /// <summary>
+        /// 用途
+        /// </summary>
+        [DataMember]
+        public string Use;
 
         /// <summary>
         /// 描述

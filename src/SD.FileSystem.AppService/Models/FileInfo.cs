@@ -58,12 +58,12 @@ namespace SD.FileSystem.AppService.Models
         public string Url { get; set; }
         #endregion
 
-        #region 用途 —— string Use
+        #region 哈希值 —— string HashValue
         /// <summary>
-        /// 用途
+        /// 哈希值
         /// </summary>
         [DataMember]
-        public string Use { get; set; }
+        public string HashValue { get; set; }
         #endregion
 
         #region 上传日期 —— DateTime UploadedDate
@@ -72,6 +72,14 @@ namespace SD.FileSystem.AppService.Models
         /// </summary>
         [DataMember]
         public DateTime UploadedDate { get; set; }
+        #endregion
+
+        #region 用途 —— string Use
+        /// <summary>
+        /// 用途
+        /// </summary>
+        [DataMember]
+        public string Use { get; set; }
         #endregion
 
         #region 描述 —— string Description
