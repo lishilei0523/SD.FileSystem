@@ -1,5 +1,7 @@
 ﻿using SD.FileSystem.Domain.Entities;
 using SD.Infrastructure.RepositoryBase;
+using System;
+using System.Collections.Generic;
 
 namespace SD.FileSystem.Domain.IRepositories
 {
@@ -8,6 +10,21 @@ namespace SD.FileSystem.Domain.IRepositories
     /// </summary>
     public interface IFileRepository : IAggRootRepository<File>
     {
-
+        #region # 分页获取文件列表 —— ICollection<File> FindByPage(string keywords, string extensionName...
+        /// <summary>
+        /// 分页获取文件列表
+        /// </summary>
+        /// <param name="keywords">关键字</param>
+        /// <param name="extensionName">扩展名</param>
+        /// <param name="uploadedDate">上传日期</param>
+        /// <param name="startTime">开始时间</param>
+        /// <param name="endTime">结束时间</param>
+        /// <param name="pageIndex">页码</param>
+        /// <param name="pageSize">页容量</param>
+        /// <param name="rowCount">总记录数</param>
+        /// <param name="pageCount">总页数</param>
+        /// <returns>文件列表</returns>
+        ICollection<File> FindByPage(string keywords, string extensionName, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize, out int rowCount, out int pageCount);
+        #endregion
     }
 }

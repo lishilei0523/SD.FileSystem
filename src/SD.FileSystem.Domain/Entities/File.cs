@@ -1,4 +1,5 @@
 ﻿using SD.Infrastructure.EntityBase;
+using System;
 using System.Text;
 
 namespace SD.FileSystem.Domain.Entities
@@ -24,19 +25,18 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="fileName">文件名称</param>
         /// <param name="extensionName">扩展名</param>
         /// <param name="size">文件大小</param>
-        /// <param name="storagePath">存储路径</param>
-        /// <param name="url">链接地址</param>
         /// <param name="use">用途</param>
+        /// <param name="uploadedDate">上传日期</param>
         /// <param name="description">描述</param>
-        public File(string fileName, string extensionName, long size, string storagePath, string url, string use, string description)
+        public File(string fileName, string extensionName, long size, string use, DateTime uploadedDate, string description)
             : this()
         {
+            base.Number = $"{base.Id}{extensionName}";
             base.Name = fileName;
             this.ExtensionName = extensionName;
             this.Size = size;
-            this.StoragePath = storagePath;
-            this.Url = url;
             this.Use = use;
+            this.UploadedDate = uploadedDate.Date;
             this.Description = description;
 
             //初始化关键字
@@ -62,11 +62,25 @@ namespace SD.FileSystem.Domain.Entities
         public long Size { get; private set; }
         #endregion
 
-        #region 存储路径 —— string StoragePath
+        #region 相对路径 —— string RelativePath
         /// <summary>
-        /// 存储路径
+        /// 相对路径
         /// </summary>
-        public string StoragePath { get; private set; }
+        public string RelativePath { get; private set; }
+        #endregion
+
+        #region 绝对路径 —— string AbsolutePath
+        /// <summary>
+        /// 绝对路径
+        /// </summary>
+        public string AbsolutePath { get; private set; }
+        #endregion
+
+        #region 主机名称 —— string HostName
+        /// <summary>
+        /// 主机名称
+        /// </summary>
+        public string HostName { get; private set; }
         #endregion
 
         #region 链接地址 —— string Url
@@ -83,6 +97,13 @@ namespace SD.FileSystem.Domain.Entities
         public string Use { get; private set; }
         #endregion
 
+        #region 上传日期 —— DateTime UploadedDate
+        /// <summary>
+        /// 上传日期
+        /// </summary>
+        public DateTime UploadedDate { get; private set; }
+        #endregion
+
         #region 描述 —— string Description
         /// <summary>
         /// 描述
@@ -94,6 +115,26 @@ namespace SD.FileSystem.Domain.Entities
 
         #region # 方法
 
+        #region 保存文件 —— void Save(string relativePath...
+        /// <summary>
+        /// 保存文件
+        /// </summary>
+        /// <param name="relativePath">相对路径</param>
+        /// <param name="absolutePath">绝对路径</param>
+        /// <param name="hostName">主机名称</param>
+        /// <param name="url">链接地址</param>
+        public void Save(string relativePath, string absolutePath, string hostName, string url)
+        {
+            this.RelativePath = relativePath;
+            this.AbsolutePath = absolutePath;
+            this.HostName = hostName;
+            this.Url = url;
+
+            //初始化关键字
+            this.InitKeywords();
+        }
+        #endregion
+
         #region 修改文件 —— void UpdateInfo(string fileName...
         /// <summary>
         /// 修改文件
@@ -101,18 +142,25 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="fileName">文件名称</param>
         /// <param name="extensionName">扩展名</param>
         /// <param name="size">文件大小</param>
-        /// <param name="storagePath">存储路径</param>
+        /// <param name="relativePath">相对路径</param>
+        /// <param name="absolutePath">绝对路径</param>
+        /// <param name="hostName">主机名称</param>
         /// <param name="url">链接地址</param>
         /// <param name="use">用途</param>
+        /// <param name="uploadedDate">上传日期</param>
         /// <param name="description">描述</param>
-        public void UpdateInfo(string fileName, string extensionName, long size, string storagePath, string url, string use, string description)
+        public void UpdateInfo(string fileName, string extensionName, long size, string relativePath, string absolutePath, string hostName, string url, string use, DateTime uploadedDate, string description)
         {
+            base.Number = $"{base.Id}{extensionName}";
             base.Name = fileName;
             this.ExtensionName = extensionName;
             this.Size = size;
-            this.StoragePath = storagePath;
+            this.RelativePath = relativePath;
+            this.AbsolutePath = absolutePath;
+            this.HostName = hostName;
             this.Url = url;
             this.Use = use;
+            this.UploadedDate = uploadedDate.Date;
             this.Description = description;
 
             //初始化关键字
