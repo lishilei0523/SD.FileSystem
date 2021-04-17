@@ -1,10 +1,10 @@
 ﻿using SD.FileSystem.Domain.Entities;
 using SD.FileSystem.Domain.IRepositories;
 using SD.Infrastructure.Repository.EntityFramework;
+using SD.Infrastructure.RepositoryBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace SD.FileSystem.Repository.Implements
 {
@@ -29,19 +29,35 @@ namespace SD.FileSystem.Repository.Implements
         /// <returns>文件列表</returns>
         public ICollection<File> FindByPage(string keywords, string extensionName, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize, out int rowCount, out int pageCount)
         {
-            uploadedDate = uploadedDate?.Date;
+            IQueryable<File> files = base.FindAllInner();
+            if (!string.IsNullOrWhiteSpace(keywords))
+            {
+                files = files.Where(x => x.Keywords.Contains(keywords));
+            }
+            if (!string.IsNullOrWhiteSpace(extensionName))
+            {
+                files = files.Where(x => x.ExtensionName == extensionName);
+            }
+            if (uploadedDate.HasValue)
+            {
+                DateTime uploadedDate_ = uploadedDate.Value.Date;
+                files = files.Where(x => x.UploadedDate == uploadedDate_);
+            }
+            if (startTime.HasValue)
+            {
+                DateTime startTime_ = startTime.Value.Date;
+                files = files.Where(x => x.AddedTime >= startTime_);
+            }
+            if (endTime.HasValue)
+            {
+                DateTime endTime_ = endTime.Value.Date;
+                files = files.Where(x => x.AddedTime <= endTime_);
+            }
 
-            Expression<Func<File, bool>> condition =
-                x =>
-                    (string.IsNullOrEmpty(keywords) || x.Keywords.Contains(keywords)) &&
-                    (string.IsNullOrEmpty(extensionName) || x.ExtensionName == extensionName) &&
-                    (uploadedDate == null || x.UploadedDate == uploadedDate) &&
-                    (startTime == null || x.AddedTime >= startTime) &&
-                    (endTime == null || x.AddedTime <= endTime);
+            IOrderedQueryable<File> orderedResult = files.OrderByDescending(x => x.AddedTime);
+            IQueryable<File> pagedResult = orderedResult.ToPage(pageIndex, pageSize, out rowCount, out pageCount);
 
-            IQueryable<File> files = base.FindByPage(condition, pageIndex, pageSize, out rowCount, out pageCount);
-
-            return files.ToList();
+            return pagedResult.ToList();
         }
         #endregion
     }
