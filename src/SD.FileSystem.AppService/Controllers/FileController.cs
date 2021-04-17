@@ -49,20 +49,20 @@ namespace SD.FileSystem.AppService.Controllers
         /// <param name="fileName">文件名称</param>
         /// <param name="extensionName">扩展名</param>
         /// <param name="size">文件大小</param>
+        /// <param name="hashValue">哈希值</param>
         /// <param name="relativePath">相对路径</param>
         /// <param name="absolutePath">绝对路径</param>
         /// <param name="hostName">主机名称</param>
         /// <param name="use">用途</param>
         /// <param name="url">链接地址</param>
-        /// <param name="hashValue">哈希值</param>
         /// <param name="uploadedDate">上传日期</param>
         /// <param name="description">描述</param>
         [HttpPost]
         [WrapPostParameters]
-        public void UpdateFile(Guid fileId, string fileName, string extensionName, long size, string relativePath, string absolutePath, string hostName, string url, string hashValue, DateTime uploadedDate, string use, string description)
+        public void UpdateFile(Guid fileId, string fileName, string extensionName, long size, string hashValue, string relativePath, string absolutePath, string hostName, string url, DateTime uploadedDate, string use, string description)
         {
             File file = this._unitOfWork.Resolve<File>(fileId);
-            file.UpdateInfo(fileName, extensionName, size, relativePath, absolutePath, hostName, url, hashValue, uploadedDate, use, description);
+            file.UpdateInfo(fileName, extensionName, size, hashValue, relativePath, absolutePath, hostName, url, uploadedDate, use, description);
 
             this._unitOfWork.RegisterSave(file);
             this._unitOfWork.Commit();
@@ -92,7 +92,7 @@ namespace SD.FileSystem.AppService.Controllers
             foreach (File file in files)
             {
                 FileParam fileParam = fileParams[file.Id];
-                file.UpdateInfo(fileParam.FileName, fileParam.ExtensionName, fileParam.Size, fileParam.RelativePath, fileParam.AbsolutePath, fileParam.HostName, fileParam.Url, fileParam.HashValue, fileParam.UploadedDate, fileParam.Use, fileParam.Description);
+                file.UpdateInfo(fileParam.FileName, fileParam.ExtensionName, fileParam.Size, fileParam.HashValue, fileParam.RelativePath, fileParam.AbsolutePath, fileParam.HostName, fileParam.Url, fileParam.UploadedDate, fileParam.Use, fileParam.Description);
             }
 
             this._unitOfWork.RegisterSaveRange(files);

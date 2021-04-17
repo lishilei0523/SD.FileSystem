@@ -25,16 +25,18 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="fileName">文件名称</param>
         /// <param name="extensionName">扩展名</param>
         /// <param name="size">文件大小</param>
+        /// <param name="hashValue">哈希值</param>
         /// <param name="uploadedDate">上传日期</param>
         /// <param name="use">用途</param>
         /// <param name="description">描述</param>
-        public File(string fileName, string extensionName, long size, DateTime uploadedDate, string use, string description)
+        public File(string fileName, string extensionName, long size, string hashValue, DateTime uploadedDate, string use, string description)
             : this()
         {
-            base.Number = $"{base.Id}{extensionName}";
+            base.Number = $"{hashValue}{extensionName}";
             base.Name = fileName;
             this.ExtensionName = extensionName;
             this.Size = size;
+            this.HashValue = hashValue;
             this.UploadedDate = uploadedDate.Date;
             this.Use = use;
             this.Description = description;
@@ -60,6 +62,13 @@ namespace SD.FileSystem.Domain.Entities
         /// 文件大小
         /// </summary>
         public long Size { get; private set; }
+        #endregion
+
+        #region 哈希值 —— string HashValue
+        /// <summary>
+        /// 哈希值
+        /// </summary>
+        public string HashValue { get; private set; }
         #endregion
 
         #region 相对路径 —— string RelativePath
@@ -88,13 +97,6 @@ namespace SD.FileSystem.Domain.Entities
         /// 链接地址
         /// </summary>
         public string Url { get; private set; }
-        #endregion
-
-        #region 哈希值 —— string HashValue
-        /// <summary>
-        /// 哈希值
-        /// </summary>
-        public string HashValue { get; private set; }
         #endregion
 
         #region 上传日期 —— DateTime UploadedDate
@@ -130,14 +132,12 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="absolutePath">绝对路径</param>
         /// <param name="hostName">主机名称</param>
         /// <param name="url">链接地址</param>
-        /// <param name="hashValue">哈希值</param>
-        public void Save(string relativePath, string absolutePath, string hostName, string url, string hashValue)
+        public void Save(string relativePath, string absolutePath, string hostName, string url)
         {
             this.RelativePath = relativePath;
             this.AbsolutePath = absolutePath;
             this.HostName = hostName;
             this.Url = url;
-            this.HashValue = hashValue;
 
             //初始化关键字
             this.InitKeywords();
@@ -151,25 +151,25 @@ namespace SD.FileSystem.Domain.Entities
         /// <param name="fileName">文件名称</param>
         /// <param name="extensionName">扩展名</param>
         /// <param name="size">文件大小</param>
+        /// <param name="hashValue">哈希值</param>
         /// <param name="relativePath">相对路径</param>
         /// <param name="absolutePath">绝对路径</param>
         /// <param name="hostName">主机名称</param>
         /// <param name="url">链接地址</param>
-        /// <param name="hashValue">哈希值</param>
         /// <param name="uploadedDate">上传日期</param>
         /// <param name="use">用途</param>
         /// <param name="description">描述</param>
-        public void UpdateInfo(string fileName, string extensionName, long size, string relativePath, string absolutePath, string hostName, string url, string hashValue, DateTime uploadedDate, string use, string description)
+        public void UpdateInfo(string fileName, string extensionName, long size, string hashValue, string relativePath, string absolutePath, string hostName, string url, DateTime uploadedDate, string use, string description)
         {
             base.Number = $"{base.Id}{extensionName}";
             base.Name = fileName;
             this.ExtensionName = extensionName;
             this.Size = size;
+            this.HashValue = hashValue;
             this.RelativePath = relativePath;
             this.AbsolutePath = absolutePath;
             this.HostName = hostName;
             this.Url = url;
-            this.HashValue = hashValue;
             this.UploadedDate = uploadedDate.Date;
             this.Use = use;
             this.Description = description;

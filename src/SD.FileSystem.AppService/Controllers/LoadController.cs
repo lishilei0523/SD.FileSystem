@@ -73,34 +73,7 @@ namespace SD.FileSystem.AppService.Controllers
 
             #endregion
 
-            string fileName = formFile.FileName;
-            string extensionName = Path.GetExtension(formFile.FileName);
-            long size = formFile.ContentLength;
-            DateTime uploadedDate = DateTime.Today;
-            File file = new File(fileName, extensionName, size, uploadedDate, use, description);
-
-            string timestamp = uploadedDate.ToString("yyyyMMdd");
-            string fileServerPath = AspNetSection.Setting.FileServer.Path;
-            string storageDirectory = $"{fileServerPath}\\{timestamp}";
-            Directory.CreateDirectory(storageDirectory);
-
-            string relativePath = $"{timestamp}/{file.Number}";
-            string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
-            string hostName = this.GetHostName();
-            string fileUrl = $"{hostName}/{relativePath}";
-            string hashValue = formFile.Datas.ToMD5();
-
-            //哈希值比对
-            File existedFile = this._fileRepository.DefaultByHash(hashValue);
-            if (existedFile != null)
-            {
-                file.Save(existedFile.RelativePath, existedFile.AbsolutePath, existedFile.HostName, existedFile.Url, hashValue);
-            }
-            else
-            {
-                System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
-                file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
-            }
+            File file = this.ProcessFile(use, description, formFile);
 
             this._unitOfWork.RegisterAdd(file);
             this._unitOfWork.Commit();
@@ -136,38 +109,10 @@ namespace SD.FileSystem.AppService.Controllers
 
             #endregion
 
-            DateTime uploadedDate = DateTime.Today;
-            string timestamp = uploadedDate.ToString("yyyyMMdd");
-            string fileServerPath = AspNetSection.Setting.FileServer.Path;
-            string storageDirectory = $"{fileServerPath}\\{timestamp}";
-            Directory.CreateDirectory(storageDirectory);
-            string hostName = this.GetHostName();
-
             IList<File> files = new List<File>();
             foreach (IFormFile formFile in formFiles)
             {
-                string fileName = formFile.FileName;
-                string extensionName = Path.GetExtension(formFile.FileName);
-                long size = formFile.ContentLength;
-                File file = new File(fileName, extensionName, size, uploadedDate, use, description);
-
-                string relativePath = $"{timestamp}/{file.Number}";
-                string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
-                string fileUrl = $"{hostName}/{relativePath}";
-                string hashValue = formFile.Datas.ToMD5();
-
-                //哈希值比对
-                File existedFile = this._fileRepository.DefaultByHash(hashValue);
-                if (existedFile != null)
-                {
-                    file.Save(existedFile.RelativePath, existedFile.AbsolutePath, existedFile.HostName, existedFile.Url, hashValue);
-                }
-                else
-                {
-                    System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
-                    file.Save(relativePath, absolutePath, hostName, fileUrl, hashValue);
-                }
-
+                File file = this.ProcessFile(use, description, formFile);
                 files.Add(file);
             }
 
@@ -182,6 +127,50 @@ namespace SD.FileSystem.AppService.Controllers
 
 
         //Private
+
+        #region # 处理文件 —— File ProcessFile(string use, string description...
+        /// <summary>
+        /// 处理文件
+        /// </summary>
+        /// <param name="use">用途</param>
+        /// <param name="description">描述</param>
+        /// <param name="formFile">Http请求文件</param>
+        /// <returns>文件</returns>
+        private File ProcessFile(string use, string description, IFormFile formFile)
+        {
+            const string timestampFormat = "yyyyMMdd";
+            string fileName = formFile.FileName;
+            string extensionName = Path.GetExtension(formFile.FileName);
+            long size = formFile.ContentLength;
+            string hashValue = formFile.Datas.ToMD5();
+            DateTime uploadedDate = DateTime.Today;
+            File file = new File(fileName, extensionName, size, hashValue, uploadedDate, use, description);
+
+            //哈希值比对
+            File existedFile = this._fileRepository.DefaultByHash(hashValue);
+            if (existedFile != null)
+            {
+                file.Save(existedFile.RelativePath, existedFile.AbsolutePath, existedFile.HostName, existedFile.Url);
+            }
+            else
+            {
+                string timestamp = uploadedDate.ToString(timestampFormat);
+                string fileServerPath = AspNetSection.Setting.FileServer.Path;
+                string storageDirectory = $"{fileServerPath}\\{timestamp}";
+                Directory.CreateDirectory(storageDirectory);
+
+                string relativePath = $"{timestamp}/{file.Number}";
+                string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
+                string hostName = this.GetHostName();
+                string fileUrl = $"{hostName}/{relativePath}";
+
+                System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
+                file.Save(relativePath, absolutePath, hostName, fileUrl);
+            }
+
+            return file;
+        }
+        #endregion
 
         #region # 获取主机名 —— string GetHostName()
         /// <summary>

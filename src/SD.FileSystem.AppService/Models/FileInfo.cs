@@ -26,6 +26,14 @@ namespace SD.FileSystem.AppService.Models
         public long Size { get; set; }
         #endregion
 
+        #region 哈希值 —— string HashValue
+        /// <summary>
+        /// 哈希值
+        /// </summary>
+        [DataMember]
+        public string HashValue { get; set; }
+        #endregion
+
         #region 相对路径 —— string RelativePath
         /// <summary>
         /// 相对路径
@@ -56,14 +64,6 @@ namespace SD.FileSystem.AppService.Models
         /// </summary>
         [DataMember]
         public string Url { get; set; }
-        #endregion
-
-        #region 哈希值 —— string HashValue
-        /// <summary>
-        /// 哈希值
-        /// </summary>
-        [DataMember]
-        public string HashValue { get; set; }
         #endregion
 
         #region 上传日期 —— DateTime UploadedDate

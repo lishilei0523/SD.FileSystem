@@ -34,6 +34,12 @@ namespace SD.FileSystem.AppService.Models
         public long Size;
 
         /// <summary>
+        /// 哈希值
+        /// </summary>
+        [DataMember]
+        public string HashValue;
+
+        /// <summary>
         /// 相对路径
         /// </summary>
         [DataMember]
@@ -56,12 +62,6 @@ namespace SD.FileSystem.AppService.Models
         /// </summary>
         [DataMember]
         public string Url;
-
-        /// <summary>
-        /// 哈希值
-        /// </summary>
-        [DataMember]
-        public string HashValue;
 
         /// <summary>
         /// 上传日期
