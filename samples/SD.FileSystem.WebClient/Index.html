@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>文件上传测试</title>
+    <script src="Scripts/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            //单文件
+            $("#singleFile").click(function () {
+                var use = document.uploadFile.use.value;
+                var description = document.uploadFile.description.value;
+                var formFile = document.uploadFile.formFile.files[0];
+
+                var form = new FormData();
+                form.append("use", use);
+                form.append("description", description);
+                form.append("formFile", formFile);
+
+                $.ajax({
+                    url: "http://localhost:4987/Load/UploadFile",
+                    type: "POST",
+                    data: form,
+                    contentType: false, //禁止设置请求类型
+                    processData: false, //禁止jQuery对DATA的处理，FormData已经做了处理
+                    success: function (response) {
+                        alert(JSON.stringify(response));
+                    }
+                });
+            });
+
+            //多文件
+            $("#multipleFiles").click(function () {
+                var use = document.uploadFiles.use.value;
+                var description = document.uploadFiles.description.value;
+                var formFiles = document.uploadFiles.formFiles.files;
+
+                var form = new FormData();
+                form.append("use", use);
+                form.append("description", description);
+                for (var i = 0; i < formFiles.length; i++) {
+                    form.append("formFiles", formFiles[i]);
+                }
+
+                $.ajax({
+                    url: "http://localhost:4987/Load/UploadFiles",
+                    type: "POST",
+                    data: form,
+                    contentType: false, //禁止设置请求类型
+                    processData: false, //禁止jQuery对DATA的处理，FormData已经做了处理
+                    success: function (response) {
+                        alert(JSON.stringify(response));
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>单文件上传</h1>
+    <form name="uploadFile" enctype="multipart/form-data">
+        <p>用途：<input type="text" name="use" /></p>
+        <p>描述：<input type="text" name="description" /></p>
+        <p>文件：<input type="file" name="formFile" /></p>
+        <p><input type="button" id="singleFile" value="提交" /></p>
+    </form>
+    <hr />
+    <hr />
+    <h1>多文件上传</h1>
+    <form name="uploadFiles" enctype="multipart/form-data">
+        <p>用途：<input type="text" name="use" /></p>
+        <p>描述：<input type="text" name="description" /></p>
+        <p>文件列表：<input type="file" name="formFiles" multiple="multiple" /></p>
+        <p><input type="button" id="multipleFiles" value="提交" /></p>
+    </form>
+</body>
+</html>
