@@ -51,6 +51,7 @@ namespace SD.FileSystem.AppService
             );
 
             //注册参数绑定
+            httpConfiguration.RegisterComplexGetParameterBindingRule();
             httpConfiguration.RegisterWrapParameterBindingRule();
             httpConfiguration.RegisterFileParameterBindingRule();
 
