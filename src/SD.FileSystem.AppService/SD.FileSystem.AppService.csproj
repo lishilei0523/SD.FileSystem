@@ -95,7 +95,7 @@
       <HintPath>..\..\packages\SD.CacheManager.2.0.2\lib\net461\SD.CacheManager.dll</HintPath>
     </Reference>
     <Reference Include="SD.CacheManager.Redis, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SD.CacheManager.Redis.2.0.4\lib\net461\SD.CacheManager.Redis.dll</HintPath>
+      <HintPath>..\..\packages\SD.CacheManager.Redis.2.0.5\lib\net461\SD.CacheManager.Redis.dll</HintPath>
     </Reference>
     <Reference Include="SD.Common, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SD.Common.3.0.3\lib\net45\SD.Common.dll</HintPath>
