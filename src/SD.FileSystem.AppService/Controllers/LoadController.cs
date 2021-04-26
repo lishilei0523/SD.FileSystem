@@ -189,7 +189,7 @@ namespace SD.FileSystem.AppService.Controllers
             else
             {
                 string timestamp = uploadedDate.ToString(timestampFormat);
-                string fileServerPath = AspNetSection.Setting.FileServer.Path;
+                string fileServerPath = AspNetSection.Setting.FileServer.Value;
                 string storageDirectory = $"{fileServerPath}\\{timestamp}";
                 Directory.CreateDirectory(storageDirectory);
 
@@ -214,7 +214,7 @@ namespace SD.FileSystem.AppService.Controllers
         private string GetHostName()
         {
             ICollection<string> hostUrls = new HashSet<string>();
-            foreach (HostElement host in AspNetSection.Setting.HostElement)
+            foreach (HostElement host in AspNetSection.Setting.HostElements)
             {
                 hostUrls.Add(host.Url);
             }

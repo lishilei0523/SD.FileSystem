@@ -62,14 +62,14 @@ namespace SD.FileSystem.AppService
             httpConfiguration.Filters.Add(new WebApiExceptionFilter());
 
             //配置服务器
-            Directory.CreateDirectory(AspNetSection.Setting.FileServer.Path);
+            Directory.CreateDirectory(AspNetSection.Setting.FileServer.Value);
             StaticFileOptions staticFileOptions = new StaticFileOptions
             {
-                FileSystem = new PhysicalFileSystem(AspNetSection.Setting.StaticFiles.Path)
+                FileSystem = new PhysicalFileSystem(AspNetSection.Setting.StaticFiles.Value)
             };
             FileServerOptions fileServerOptions = new FileServerOptions
             {
-                FileSystem = new PhysicalFileSystem(AspNetSection.Setting.FileServer.Path),
+                FileSystem = new PhysicalFileSystem(AspNetSection.Setting.FileServer.Value),
                 EnableDirectoryBrowsing = true
             };
             appBuilder.UseStaticFiles(staticFileOptions);

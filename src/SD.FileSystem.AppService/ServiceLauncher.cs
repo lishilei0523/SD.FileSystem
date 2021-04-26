@@ -21,7 +21,7 @@ namespace SD.FileSystem.AppService
         public void Start()
         {
             StartOptions startOptions = new StartOptions();
-            foreach (HostElement host in AspNetSection.Setting.HostElement)
+            foreach (HostElement host in AspNetSection.Setting.HostElements)
             {
                 startOptions.Urls.Add(host.Url);
                 Console.WriteLine($"Listening: {host.Url}");
