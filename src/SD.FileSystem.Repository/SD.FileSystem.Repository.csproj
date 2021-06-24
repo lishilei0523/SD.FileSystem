@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;netstandard2.1</TargetFrameworks>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Copyright>Copyright © SD 2021</Copyright>
@@ -31,8 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="EntityFramework.Firebird" Version="8.0.1" />
-    <PackageReference Include="SD.Infrastructure" Version="3.0.1" />
+    <PackageReference Include="SD.Infrastructure" Version="3.0.3" />
     <PackageReference Include="SD.Infrastructure.Repository.EntityFramework" Version="2.0.9" />
     <PackageReference Include="SD.IdentitySystem.Membership" Version="3.0.1" />
   </ItemGroup>
