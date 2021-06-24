@@ -21,7 +21,7 @@ namespace SD.FileSystem.WindowsClient
 
         static void UploadFile()
         {
-            string url = "http://localhost:4987/Load/UploadFile";
+            string url = "http://localhost:4987/Api/Load/UploadFile";
 
             RestRequest request = new RestRequest(Method.POST);
             request.AddParameter("use", "用途");
@@ -53,7 +53,7 @@ namespace SD.FileSystem.WindowsClient
 
         static void UploadFiles()
         {
-            string url = "http://localhost:4987/Load/UploadFiles";
+            string url = "http://localhost:4987/Api/Load/UploadFiles";
 
             RestRequest request = new RestRequest(Method.POST);
             request.AddParameter("use", "用途");
