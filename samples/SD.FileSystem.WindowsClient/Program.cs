@@ -14,7 +14,7 @@ namespace SD.FileSystem.WindowsClient
             //UploadFile();
 
             //上传多文件
-            //UploadFiles();
+            UploadFiles();
 
             Console.ReadKey();
         }

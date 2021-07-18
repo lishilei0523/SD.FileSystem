@@ -66,6 +66,7 @@ namespace SD.FileSystem.AppService
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             //配置服务器
+            Directory.CreateDirectory(AspNetSection.Setting.StaticFiles.Value);
             Directory.CreateDirectory(AspNetSection.Setting.FileServer.Value);
             StaticFileOptions staticFileOptions = new StaticFileOptions
             {

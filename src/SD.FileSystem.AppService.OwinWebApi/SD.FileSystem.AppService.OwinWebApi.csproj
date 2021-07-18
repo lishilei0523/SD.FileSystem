@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net48</TargetFrameworks>
+    <RootNamespace>SD.FileSystem.AppService</RootNamespace>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Authors>Lee</Authors>
@@ -9,18 +10,18 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\SD.FileSystem.AppService.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\SD.FileSystem.AppService.OwinWebApi.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\$(TargetFramework)\SD.FileSystem.AppService.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\SD.FileSystem.AppService.OwinWebApi.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="Views\favicon.ico">
+    <Content Include="Content\favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Index.html">
+    <Content Include="Content\Index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
