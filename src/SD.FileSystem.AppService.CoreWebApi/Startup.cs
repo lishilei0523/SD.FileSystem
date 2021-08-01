@@ -12,6 +12,8 @@ using System;
 using System.Data.Common;
 using System.IO;
 using System.Reflection;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace SD.FileSystem.AppService
 {
@@ -51,14 +53,22 @@ namespace SD.FileSystem.AppService
                 options.IncludeXmlComments(xmlFilePath);
             });
 
-            //添加过滤器及Camel命名设置
+            //添加过滤器
             services.AddControllers(options =>
             {
                 options.Filters.Add<WebApiAuthenticationFilter>();
                 options.Filters.Add<WebApiExceptionFilter>();
-            }).AddJsonOptions(options =>
+            }).AddNewtonsoftJson(options =>
             {
-                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                //Camel命名设置
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+                //日期时间格式设置
+                IsoDateTimeConverter dateTimeConverter = new IsoDateTimeConverter()
+                {
+                    DateTimeFormat = "yyyy-MM-dd HH:mm:ss"
+                };
+                options.SerializerSettings.Converters.Add(dateTimeConverter);
             });
 
             //注册ADO.NET Provider
