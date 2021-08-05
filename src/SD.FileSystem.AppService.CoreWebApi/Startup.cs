@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using SD.IdentitySystem.WebApiCore.Authentication.Filters;
 using SD.Infrastructure.AspNetCore.Server.Middlewares;
+using SD.Infrastructure.Constants;
 using SD.Toolkits.AspNet;
 using SD.Toolkits.OwinCore.Middlewares;
 using SD.Toolkits.WebApiCore.Filters;
@@ -12,8 +15,6 @@ using System;
 using System.Data.Common;
 using System.IO;
 using System.Reflection;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 
 namespace SD.FileSystem.AppService
 {
@@ -66,7 +67,7 @@ namespace SD.FileSystem.AppService
                 //日期时间格式设置
                 IsoDateTimeConverter dateTimeConverter = new IsoDateTimeConverter()
                 {
-                    DateTimeFormat = "yyyy-MM-dd HH:mm:ss"
+                    DateTimeFormat = CommonConstants.TimeFormat
                 };
                 options.SerializerSettings.Converters.Add(dateTimeConverter);
             });
