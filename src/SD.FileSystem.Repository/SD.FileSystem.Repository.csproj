@@ -7,27 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Firebird\icudt52l.dat">
+    <None Update="Firebird\plugins\engine13.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Firebird\fbclient.dll">
+    </None>
+    <None Update="Firebird\fbclient.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Firebird\ib_util.dll">
+    </None>
+    <None Update="Firebird\ib_util.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Firebird\icudt52.dll">
+    </None>
+    <None Update="Firebird\icudt63.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Firebird\icuin52.dll">
+    </None>
+    <None Update="Firebird\icudt63l.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Firebird\icuuc52.dll">
+    </None>
+    <None Update="Firebird\icuin63.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Firebird\plugins\engine12.dll">
+    </None>
+    <None Update="Firebird\icuuc63.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
