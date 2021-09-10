@@ -58,8 +58,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
     <PackageReference Include="SD.Common" Version="3.0.4" />
     <PackageReference Include="SD.Toolkits.AspNet" Version="1.0.4" />
+    <PackageReference Include="SD.Toolkits.AspNetCore" Version="2.0.0" />
     <PackageReference Include="SD.Toolkits.OwinCore" Version="1.0.1" />
-    <PackageReference Include="SD.Toolkits.WebApiCore" Version="1.1.4" />
     <PackageReference Include="SD.Toolkits.Json" Version="1.0.1" />
     <PackageReference Include="SD.Toolkits.Mapper" Version="1.0.0" />
     <PackageReference Include="SD.Toolkits.Redis" Version="2.0.7" />
