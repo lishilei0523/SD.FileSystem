@@ -8,7 +8,7 @@ namespace SD.FileSystem.Repository.Base
     /// <summary>
     /// EF上下文
     /// </summary>
-    internal class DbSession : BaseDbSession
+    internal class DbSession : DbSessionBase
     {
         /// <summary>
         /// Firebird数据库连接
@@ -18,7 +18,7 @@ namespace SD.FileSystem.Repository.Base
             get
             {
                 GlobalSetting.InitDataDirectory();
-                return new FbConnection(GlobalSetting.DefaultConnectionString);
+                return new FbConnection(GlobalSetting.WriteConnectionString);
             }
         }
 
