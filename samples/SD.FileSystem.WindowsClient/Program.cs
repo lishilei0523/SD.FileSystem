@@ -53,6 +53,7 @@ namespace SD.FileSystem.WindowsClient
 
         static void UploadFiles()
         {
+            //string url = "http://192.168.51.100:4987/Api/Load/UploadFiles";
             string url = "http://localhost:4987/Api/Load/UploadFiles";
 
             RestRequest request = new RestRequest(Method.POST);

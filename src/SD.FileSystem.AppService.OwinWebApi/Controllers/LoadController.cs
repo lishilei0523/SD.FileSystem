@@ -2,7 +2,6 @@
 using SD.FileSystem.AppService.Models;
 using SD.FileSystem.Domain.IRepositories;
 using SD.Toolkits.AspNet;
-using SD.Toolkits.AspNet.Configurations;
 using SD.Toolkits.WebApi.Attributes;
 using SD.Toolkits.WebApi.Models;
 using System;
@@ -195,7 +194,7 @@ namespace SD.FileSystem.AppService.Controllers
 
                 string relativePath = $"{timestamp}/{file.Number}";
                 string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
-                string hostName = this.GetHostName();
+                string hostName = $"http://{this.Request.RequestUri.Host}:{this.Request.RequestUri.Port}";
                 string fileUrl = $"{hostName}/{relativePath}";
 
                 System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
@@ -203,24 +202,6 @@ namespace SD.FileSystem.AppService.Controllers
             }
 
             return file;
-        }
-        #endregion
-
-        #region # 获取主机名 —— string GetHostName()
-        /// <summary>
-        /// 获取主机名
-        /// </summary>
-        /// <returns>主机名</returns>
-        private string GetHostName()
-        {
-            ICollection<string> hostUrls = new HashSet<string>();
-            foreach (HostElement host in AspNetSection.Setting.HostElements)
-            {
-                hostUrls.Add(host.Url);
-            }
-
-            string generalHostUrl = hostUrls.OrderBy(x => x).First();
-            return generalHostUrl;
         }
         #endregion
     }

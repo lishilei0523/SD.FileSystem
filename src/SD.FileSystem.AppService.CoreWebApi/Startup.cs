@@ -97,8 +97,8 @@ namespace SD.FileSystem.AppService
             appBuilder.UseEndpoints(routeBuilder => routeBuilder.MapControllers());
 
             //ÅäÖÃ·þÎñÆ÷
-            string staticFilesRoot = Path.Combine(AppContext.BaseDirectory, AspNetSection.Setting.StaticFiles.Value);
-            string fileServerRoot = Path.Combine(AppContext.BaseDirectory, AspNetSection.Setting.FileServer.Value);
+            string staticFilesRoot = Path.Combine(AppContext.BaseDirectory, AspNetSetting.StaticFilesPath);
+            string fileServerRoot = Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
             Directory.CreateDirectory(staticFilesRoot);
             Directory.CreateDirectory(fileServerRoot);
             StaticFileOptions staticFileOptions = new StaticFileOptions

@@ -66,15 +66,15 @@ namespace SD.FileSystem.AppService
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             //配置服务器
-            Directory.CreateDirectory(AspNetSection.Setting.StaticFiles.Value);
-            Directory.CreateDirectory(AspNetSection.Setting.FileServer.Value);
+            Directory.CreateDirectory(AspNetSetting.StaticFilesPath);
+            Directory.CreateDirectory(AspNetSetting.FileServerPath);
             StaticFileOptions staticFileOptions = new StaticFileOptions
             {
-                FileSystem = new PhysicalFileSystem(AspNetSection.Setting.StaticFiles.Value)
+                FileSystem = new PhysicalFileSystem(AspNetSetting.StaticFilesPath)
             };
             FileServerOptions fileServerOptions = new FileServerOptions
             {
-                FileSystem = new PhysicalFileSystem(AspNetSection.Setting.FileServer.Value),
+                FileSystem = new PhysicalFileSystem(AspNetSetting.FileServerPath),
                 EnableDirectoryBrowsing = true
             };
             appBuilder.UseStaticFiles(staticFileOptions);
