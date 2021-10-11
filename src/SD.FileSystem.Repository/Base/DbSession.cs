@@ -17,6 +17,7 @@ namespace SD.FileSystem.Repository.Base
         {
             get
             {
+                //※目录调整
                 GlobalSetting.InitDataDirectory();
                 return new FbConnection(GlobalSetting.WriteConnectionString);
             }
