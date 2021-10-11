@@ -14,6 +14,11 @@ namespace SD.FileSystem.Repository.Base
         /// </summary>
         public void Initialize()
         {
+            using (DbSession dbSession = new DbSession())
+            {
+                dbSession.Database.EnsureCreated();
+            }
+
             EFUnitOfWorkProvider.GetLoginInfo += MembershipMediator.GetLoginInfo;
         }
     }

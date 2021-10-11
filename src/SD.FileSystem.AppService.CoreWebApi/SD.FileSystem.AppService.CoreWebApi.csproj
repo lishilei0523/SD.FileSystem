@@ -10,11 +10,19 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Debug\$(TargetFramework)\SD.FileSystem.AppService.CoreWebApi.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Release\$(TargetFramework)\SD.FileSystem.AppService.CoreWebApi.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AppConfigWithTargetPath Include="App.config">
+      <TargetPath>ef.dll.config</TargetPath>
+    </AppConfigWithTargetPath>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\SD.FileSystem.AppService.OwinWebApi\Models\FileInfo.cs">
@@ -50,11 +58,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="EntityFramework.Firebird" Version="8.5.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.10" />
+    <PackageReference Include="FirebirdSql.EntityFrameworkCore.Firebird" Version="8.5.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.17" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
     <PackageReference Include="SD.Common" Version="3.0.4" />
     <PackageReference Include="SD.Toolkits.AspNet" Version="1.1.0" />
@@ -78,6 +91,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SD.FileSystem.Domain\SD.FileSystem.Domain.csproj" />
-    <ProjectReference Include="..\SD.FileSystem.Repository\SD.FileSystem.Repository.csproj" />
+    <ProjectReference Include="..\SD.FileSystem.Repository.EFCore\SD.FileSystem.Repository.EFCore.csproj" />
   </ItemGroup>
 </Project>

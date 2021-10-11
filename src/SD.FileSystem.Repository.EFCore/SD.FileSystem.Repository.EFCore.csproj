@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Firebird\plugins\engine13.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
