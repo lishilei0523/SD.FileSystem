@@ -1,4 +1,3 @@
-using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -12,7 +11,6 @@ using SD.Toolkits.AspNet;
 using SD.Toolkits.AspNetCore.Filters;
 using SD.Toolkits.OwinCore.Middlewares;
 using System;
-using System.Data.Common;
 using System.IO;
 using System.Reflection;
 
@@ -71,9 +69,6 @@ namespace SD.FileSystem.AppService
                 };
                 options.SerializerSettings.Converters.Add(dateTimeConverter);
             });
-
-            //×¢²áADO.NET Provider
-            DbProviderFactories.RegisterFactory("FirebirdSql.Data.FirebirdClient", FirebirdClientFactory.Instance);
         }
 
         /// <summary>

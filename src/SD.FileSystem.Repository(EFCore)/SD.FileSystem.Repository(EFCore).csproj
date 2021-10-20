@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>SD.FileSystem.Repository</AssemblyName>
+    <RootNamespace>SD.FileSystem.Repository</RootNamespace>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Copyright>Copyright © SD 2021</Copyright>
-    <AssemblyName>SD.FileSystem.Repository</AssemblyName>
-    <RootNamespace>SD.FileSystem.Repository</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

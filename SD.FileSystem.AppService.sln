@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.AppService.OwinWebApi", "src\SD.FileSystem.AppService.OwinWebApi\SD.FileSystem.AppService.OwinWebApi.csproj", "{0AEA26E2-2426-4CEA-8DEE-F9B972FB4239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.AppService(CoreWebApi)", "src\SD.FileSystem.AppService(CoreWebApi)\SD.FileSystem.AppService(CoreWebApi).csproj", "{7C7A4376-3F19-469F-894F-E5B4C022CF0F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.AppService(OwinWebApi)", "src\SD.FileSystem.AppService(OwinWebApi)\SD.FileSystem.AppService(OwinWebApi).csproj", "{0AEA26E2-2426-4CEA-8DEE-F9B972FB4239}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.Domain", "src\SD.FileSystem.Domain\SD.FileSystem.Domain.csproj", "{16F9D846-1A08-40FA-AE75-174567AB6643}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.Repository", "src\SD.FileSystem.Repository\SD.FileSystem.Repository.csproj", "{03EA83FC-6D6B-4B2B-9051-590D79343ADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.Repository(EF6)", "src\SD.FileSystem.Repository(EF6)\SD.FileSystem.Repository(EF6).csproj", "{03EA83FC-6D6B-4B2B-9051-590D79343ADA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.AppService.CoreWebApi", "src\SD.FileSystem.AppService.CoreWebApi\SD.FileSystem.AppService.CoreWebApi.csproj", "{7C7A4376-3F19-469F-894F-E5B4C022CF0F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.Repository.EFCore", "src\SD.FileSystem.Repository.EFCore\SD.FileSystem.Repository.EFCore.csproj", "{51DFE6F3-02A8-40AF-8230-66CAE649B355}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SD.FileSystem.Repository(EFCore)", "src\SD.FileSystem.Repository(EFCore)\SD.FileSystem.Repository(EFCore).csproj", "{51DFE6F3-02A8-40AF-8230-66CAE649B355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

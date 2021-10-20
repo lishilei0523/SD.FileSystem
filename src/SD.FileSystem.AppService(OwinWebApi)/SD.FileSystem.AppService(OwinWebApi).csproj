@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net48</TargetFrameworks>
+    <AssemblyName>SD.FileSystem.AppService</AssemblyName>
     <RootNamespace>SD.FileSystem.AppService</RootNamespace>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
@@ -11,11 +12,11 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\$(TargetFramework)\SD.FileSystem.AppService.OwinWebApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\SD.FileSystem.AppService.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Release\$(TargetFramework)\SD.FileSystem.AppService.OwinWebApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\SD.FileSystem.AppService.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,6 +65,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SD.FileSystem.Domain\SD.FileSystem.Domain.csproj" />
-    <ProjectReference Include="..\SD.FileSystem.Repository\SD.FileSystem.Repository.csproj" />
+    <ProjectReference Include="..\SD.FileSystem.Repository(EF6)\SD.FileSystem.Repository(EF6).csproj" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <NoDefaultLaunchSettingsFile>True</NoDefaultLaunchSettingsFile>
+    <AssemblyName>SD.FileSystem.AppService</AssemblyName>
     <RootNamespace>SD.FileSystem.AppService</RootNamespace>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Authors>Lee</Authors>
@@ -11,16 +12,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\$(TargetFramework)\SD.FileSystem.AppService.CoreWebApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\SD.FileSystem.AppService.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Release\$(TargetFramework)\SD.FileSystem.AppService.CoreWebApi.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\SD.FileSystem.AppService.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Update="App.config">
@@ -59,23 +56,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\SD.FileSystem.AppService.OwinWebApi\Models\FileInfo.cs">
+    <Compile Include="..\SD.FileSystem.AppService(OwinWebApi)\Models\FileInfo.cs">
       <Link>Models\FileInfo.cs</Link>
     </Compile>
-    <Compile Include="..\SD.FileSystem.AppService.OwinWebApi\Models\FileMap.cs">
+    <Compile Include="..\SD.FileSystem.AppService(OwinWebApi)\Models\FileMap.cs">
       <Link>Models\FileMap.cs</Link>
     </Compile>
-    <Compile Include="..\SD.FileSystem.AppService.OwinWebApi\Models\FileParam.cs">
+    <Compile Include="..\SD.FileSystem.AppService(OwinWebApi)\Models\FileParam.cs">
       <Link>Models\FileParam.cs</Link>
     </Compile>
-    <Content Include="..\SD.FileSystem.AppService.OwinWebApi\Content\favicon.ico">
+    <Content Include="..\SD.FileSystem.AppService(OwinWebApi)\Content\favicon.ico">
       <Link>Content\favicon.ico</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\SD.FileSystem.AppService.OwinWebApi\Content\Index.html">
+    <Content Include="..\SD.FileSystem.AppService(OwinWebApi)\Content\Index.html">
       <Link>Content\Index.html</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\Default.pubxml.user" />
   </ItemGroup>
 
   <ItemGroup>
@@ -112,6 +113,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SD.FileSystem.Domain\SD.FileSystem.Domain.csproj" />
-    <ProjectReference Include="..\SD.FileSystem.Repository.EFCore\SD.FileSystem.Repository.EFCore.csproj" />
+    <ProjectReference Include="..\SD.FileSystem.Repository(EFCore)\SD.FileSystem.Repository(EFCore).csproj" />
   </ItemGroup>
 </Project>

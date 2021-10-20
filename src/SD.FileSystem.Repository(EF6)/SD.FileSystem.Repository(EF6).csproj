@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net48;netstandard2.1</TargetFrameworks>
+    <AssemblyName>SD.FileSystem.Repository</AssemblyName>
+    <RootNamespace>SD.FileSystem.Repository</RootNamespace>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Copyright>Copyright © SD 2021</Copyright>
