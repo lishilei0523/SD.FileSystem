@@ -40,6 +40,11 @@ namespace SD.FileSystem.Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AddedTime",
+                table: "File",
+                column: "AddedTime");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_HashValue",
                 table: "File",
                 column: "HashValue");

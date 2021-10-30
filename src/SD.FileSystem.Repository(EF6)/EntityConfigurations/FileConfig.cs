@@ -15,11 +15,13 @@ namespace SD.FileSystem.Repository.EntityConfigurations
         public FileConfig()
         {
             //配置属性
+            this.HasKey(file => file.Id);
             this.Property(file => file.Name).IsRequired().HasMaxLength(64);
             this.Property(file => file.ExtensionName).IsRequired().HasMaxLength(16);
             this.Property(file => file.HashValue).IsRequired().HasMaxLength(32);
 
             //配置索引
+            this.HasIndex("IX_AddedTime", IndexType.Clustered, table => table.Property(file => file.AddedTime));
             this.HasIndex("IX_HashValue", IndexType.Nonclustered, table => table.Property(file => file.HashValue));
         }
     }

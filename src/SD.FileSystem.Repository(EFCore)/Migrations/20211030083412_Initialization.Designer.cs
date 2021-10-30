@@ -10,7 +10,7 @@ using SD.FileSystem.Repository.Base;
 namespace SD.FileSystem.Repository.Migrations
 {
     [DbContext(typeof(DbSession))]
-    [Migration("20211011101819_Initialization")]
+    [Migration("20211030083412_Initialization")]
     partial class Initialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,6 +96,9 @@ namespace SD.FileSystem.Repository.Migrations
                         .HasColumnType("BLOB SUB_TYPE TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddedTime")
+                        .HasDatabaseName("IX_AddedTime");
 
                     b.HasIndex("HashValue")
                         .HasDatabaseName("IX_HashValue");

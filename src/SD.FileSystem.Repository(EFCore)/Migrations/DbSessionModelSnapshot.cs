@@ -95,6 +95,9 @@ namespace SD.FileSystem.Repository.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddedTime")
+                        .HasDatabaseName("IX_AddedTime");
+
                     b.HasIndex("HashValue")
                         .HasDatabaseName("IX_HashValue");
 
