@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SD.IdentitySystem;
+﻿using SD.IdentitySystem;
 using SD.Infrastructure.Repository.EntityFrameworkCore;
 using SD.Infrastructure.RepositoryBase;
 
@@ -15,11 +14,6 @@ namespace SD.FileSystem.Repository.Base
         /// </summary>
         public void Initialize()
         {
-            using (DbSession dbSession = new DbSession())
-            {
-                dbSession.Database.Migrate();
-            }
-
             EFUnitOfWorkProvider.GetLoginInfo += MembershipMediator.GetLoginInfo;
         }
     }
