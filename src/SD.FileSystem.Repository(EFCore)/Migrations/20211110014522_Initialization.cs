@@ -23,7 +23,7 @@ namespace SD.FileSystem.Repository.Migrations
                     Use = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Keywords = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     SavedTime = table.Column<DateTime>(type: "datetime2", nullable: false),

@@ -17,6 +17,7 @@ namespace SD.FileSystem.Repository.EntityConfigurations
             //配置属性
             this.HasKey(file => file.Id, index => index.IsClustered(false));
             this.Property(file => file.Keywords).IsRequired().HasMaxLength(256);
+            this.Property(file => file.Number).IsRequired().HasMaxLength(64);
             this.Property(file => file.Name).IsRequired().HasMaxLength(64);
             this.Property(file => file.ExtensionName).IsRequired().HasMaxLength(16);
             this.Property(file => file.HashValue).IsRequired().HasMaxLength(32);

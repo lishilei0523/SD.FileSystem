@@ -69,7 +69,9 @@ namespace SD.FileSystem.Repository.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("OperatorAccount")
                         .HasColumnType("nvarchar(max)");
