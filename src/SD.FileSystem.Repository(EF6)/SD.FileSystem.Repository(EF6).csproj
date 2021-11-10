@@ -9,32 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Firebird\plugins\engine13.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Firebird\fbclient.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Firebird\ib_util.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Firebird\icudt63.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Firebird\icudt63l.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Firebird\icuin63.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Firebird\icuuc63.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="EntityFramework.Firebird" Version="8.5.3" />
     <PackageReference Include="SD.Infrastructure" Version="3.1.4" />
     <PackageReference Include="SD.Infrastructure.Repository.EntityFramework" Version="2.2.2" />
     <PackageReference Include="SD.IdentitySystem.Membership" Version="3.0.1" />

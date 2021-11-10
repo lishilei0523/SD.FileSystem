@@ -14,10 +14,7 @@ namespace SD.FileSystem.Repository.Base
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //※目录调整
-            GlobalSetting.InitDataDirectory();
-
-            optionsBuilder.UseFirebird(NetCoreSetting.WriteConnectionString);
+            optionsBuilder.UseSqlServer(NetCoreSetting.WriteConnectionString);
             base.OnConfiguring(optionsBuilder);
         }
     }

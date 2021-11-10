@@ -6,4 +6,4 @@
 
 # 项目说明
 
-    利用OWIN WebApi实现的简单文件管理系统；
+    利用ASP.NET Core与OWIN WebApi分别实现的简单文件管理系统；

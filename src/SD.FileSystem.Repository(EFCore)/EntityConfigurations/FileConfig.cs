@@ -15,14 +15,15 @@ namespace SD.FileSystem.Repository.EntityConfigurations
         public void Configure(EntityTypeBuilder<File> builder)
         {
             //配置属性
-            builder.HasKey(file => file.Id);
+            builder.HasKey(file => file.Id).IsClustered(false);
+            builder.Property(file => file.Keywords).IsRequired().HasMaxLength(256);
             builder.Property(file => file.Name).IsRequired().HasMaxLength(64);
             builder.Property(file => file.ExtensionName).IsRequired().HasMaxLength(16);
             builder.Property(file => file.HashValue).IsRequired().HasMaxLength(32);
 
             //配置索引
-            builder.HasIndex(file => file.AddedTime).HasDatabaseName("IX_AddedTime").IsUnique(false);
-            builder.HasIndex(file => file.HashValue).HasDatabaseName("IX_HashValue");
+            builder.HasIndex(file => file.AddedTime).HasDatabaseName("IX_AddedTime").IsUnique(false).IsClustered(true);
+            builder.HasIndex(file => file.HashValue).HasDatabaseName("IX_HashValue").IsUnique(false);
         }
     }
 }
