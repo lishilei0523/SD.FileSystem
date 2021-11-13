@@ -32,6 +32,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Installers\Installer.WindowsService.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Installers\Installer.WindowsService.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\SD.FileSystem.AppService(OwinWebApi)\Models\FileInfo.cs">
       <Link>Models\FileInfo.cs</Link>
     </Compile>
