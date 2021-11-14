@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net48;netstandard2.1</TargetFrameworks>
+    <TargetFramework>net48</TargetFramework>
     <AssemblyName>SD.FileSystem.Repository</AssemblyName>
     <RootNamespace>SD.FileSystem.Repository</RootNamespace>
     <Authors>Lee</Authors>
