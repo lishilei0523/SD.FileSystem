@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net461;net48</TargetFrameworks>
     <AssemblyName>SD.FileSystem.AppService</AssemblyName>
     <RootNamespace>SD.FileSystem.AppService</RootNamespace>
     <OutputType>Exe</OutputType>
