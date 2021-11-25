@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
@@ -68,6 +69,12 @@ namespace SD.FileSystem.AppService
                     DateTimeFormat = CommonConstants.DateTimeFormat
                 };
                 options.SerializerSettings.Converters.Add(dateTimeConverter);
+            });
+
+            //±Ìµ•…Ë÷√
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = int.MaxValue;
             });
         }
 

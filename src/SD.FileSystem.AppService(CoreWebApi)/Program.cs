@@ -19,6 +19,8 @@ namespace SD.FileSystem.AppService
                     {
                         options.ListenAnyIP(httpPort);
                     }
+
+                    options.Limits.MaxRequestBodySize = int.MaxValue;
                 });
 
                 webBuilder.UseWebRoot(AspNetSetting.StaticFilesPath);

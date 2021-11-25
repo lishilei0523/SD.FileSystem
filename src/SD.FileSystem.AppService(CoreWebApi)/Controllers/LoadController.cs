@@ -59,6 +59,7 @@ namespace SD.FileSystem.AppService.Controllers
         /// <returns>文件</returns>
         [HttpPost]
         [FileParameters]
+        [DisableRequestSizeLimit]
         public FileInfo UploadFile(string use, string description, IFormFile formFile)
         {
             #region # 验证
@@ -95,6 +96,7 @@ namespace SD.FileSystem.AppService.Controllers
         /// <returns>文件列表</returns>
         [HttpPost]
         [FileParameters]
+        [DisableRequestSizeLimit]
         public IEnumerable<FileInfo> UploadFiles(string use, string description, IFormFileCollection formFiles)
         {
             #region # 验证
