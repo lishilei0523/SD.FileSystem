@@ -18,7 +18,7 @@ namespace SD.FileSystem.Repository.EntityConfigurations
             builder.HasKey(file => file.Id).IsClustered(false);
             builder.Property(file => file.Keywords).IsRequired().HasMaxLength(256);
             builder.Property(file => file.Number).IsRequired().HasMaxLength(64);
-            builder.Property(file => file.Name).IsRequired().HasMaxLength(64);
+            builder.Property(file => file.Name).IsRequired().HasMaxLength(256);
             builder.Property(file => file.ExtensionName).IsRequired().HasMaxLength(16);
             builder.Property(file => file.HashValue).IsRequired().HasMaxLength(32);
 
