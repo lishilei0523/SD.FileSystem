@@ -25,7 +25,7 @@ namespace SD.FileSystem.Repository.Migrations
                     AddedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Number = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Keywords = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SavedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedTime = table.Column<DateTime>(type: "datetime2", nullable: true),

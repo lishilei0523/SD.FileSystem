@@ -10,7 +10,7 @@ using SD.FileSystem.Repository.Base;
 namespace SD.FileSystem.Repository.Migrations
 {
     [DbContext(typeof(DbSession))]
-    [Migration("20211126065755_Initialization")]
+    [Migration("20211126070031_Initialization")]
     partial class Initialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,8 +62,7 @@ namespace SD.FileSystem.Repository.Migrations
 
                     b.Property<string>("Keywords")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

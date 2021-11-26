@@ -60,8 +60,7 @@ namespace SD.FileSystem.Repository.Migrations
 
                     b.Property<string>("Keywords")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
