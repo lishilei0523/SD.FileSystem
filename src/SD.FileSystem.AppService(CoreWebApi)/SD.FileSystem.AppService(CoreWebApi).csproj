@@ -20,9 +20,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Update="App.config">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
     <Content Include="favicon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -68,7 +65,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.20" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="SD.Common" Version="3.0.8" />
+    <PackageReference Include="SD.Common" Version="3.1.0" />
     <PackageReference Include="SD.Toolkits.AspNet" Version="1.1.1" />
     <PackageReference Include="SD.Toolkits.AspNetCore" Version="2.0.2" />
     <PackageReference Include="SD.Toolkits.OwinCore" Version="1.0.3" />
