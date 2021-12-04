@@ -23,8 +23,8 @@ namespace SD.FileSystem.Repository.EntityConfigurations
             this.Property(file => file.HashValue).IsRequired().HasMaxLength(32);
 
             //配置索引
-            this.HasIndex("IX_AddedTime", IndexType.Clustered, table => table.Property(file => file.AddedTime));
-            this.HasIndex("IX_HashValue", IndexType.Nonclustered, table => table.Property(file => file.HashValue));
+            this.HasIndex("IX_File_AddedTime", IndexType.Clustered, table => table.Property(file => file.AddedTime));
+            this.HasIndex("IX_File_HashValue", IndexType.Nonclustered, table => table.Property(file => file.HashValue));
         }
     }
 }

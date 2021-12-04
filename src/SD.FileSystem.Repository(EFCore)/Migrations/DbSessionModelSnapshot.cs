@@ -100,11 +100,9 @@ namespace SD.FileSystem.Repository.Migrations
                         .IsClustered(false);
 
                     b.HasIndex("AddedTime")
-                        .HasDatabaseName("IX_AddedTime")
                         .IsClustered();
 
-                    b.HasIndex("HashValue")
-                        .HasDatabaseName("IX_HashValue");
+                    b.HasIndex("HashValue");
 
                     b.ToTable("File");
                 });

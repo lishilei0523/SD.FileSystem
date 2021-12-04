@@ -10,7 +10,7 @@ using SD.FileSystem.Repository.Base;
 namespace SD.FileSystem.Repository.Migrations
 {
     [DbContext(typeof(DbSession))]
-    [Migration("20211126070031_Initialization")]
+    [Migration("20211204085340_Initialization")]
     partial class Initialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,11 +102,9 @@ namespace SD.FileSystem.Repository.Migrations
                         .IsClustered(false);
 
                     b.HasIndex("AddedTime")
-                        .HasDatabaseName("IX_AddedTime")
                         .IsClustered();
 
-                    b.HasIndex("HashValue")
-                        .HasDatabaseName("IX_HashValue");
+                    b.HasIndex("HashValue");
 
                     b.ToTable("File");
                 });

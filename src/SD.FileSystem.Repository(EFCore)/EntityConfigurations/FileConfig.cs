@@ -23,8 +23,8 @@ namespace SD.FileSystem.Repository.EntityConfigurations
             builder.Property(file => file.HashValue).IsRequired().HasMaxLength(32);
 
             //配置索引
-            builder.HasIndex(file => file.AddedTime).HasDatabaseName("IX_AddedTime").IsUnique(false).IsClustered(true);
-            builder.HasIndex(file => file.HashValue).HasDatabaseName("IX_HashValue").IsUnique(false);
+            builder.HasIndex(file => file.AddedTime).IsUnique(false).IsClustered();
+            builder.HasIndex(file => file.HashValue).IsUnique(false);
         }
     }
 }

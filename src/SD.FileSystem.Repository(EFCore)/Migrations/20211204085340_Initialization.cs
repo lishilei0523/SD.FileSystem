@@ -41,13 +41,13 @@ namespace SD.FileSystem.Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddedTime",
+                name: "IX_File_AddedTime",
                 table: "File",
                 column: "AddedTime")
                 .Annotation("SqlServer:Clustered", true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_HashValue",
+                name: "IX_File_HashValue",
                 table: "File",
                 column: "HashValue");
         }
