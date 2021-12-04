@@ -22,6 +22,7 @@ namespace SD.FileSystem.Repository.Migrations
                     UploadedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Use = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PartitionIndex = table.Column<int>(type: "int", nullable: false),
                     AddedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Number = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),

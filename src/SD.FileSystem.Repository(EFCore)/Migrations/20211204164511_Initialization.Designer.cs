@@ -10,7 +10,7 @@ using SD.FileSystem.Repository.Base;
 namespace SD.FileSystem.Repository.Migrations
 {
     [DbContext(typeof(DbSession))]
-    [Migration("20211204085340_Initialization")]
+    [Migration("20211204164511_Initialization")]
     partial class Initialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,6 +79,9 @@ namespace SD.FileSystem.Repository.Migrations
 
                     b.Property<string>("OperatorName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PartitionIndex")
+                        .HasColumnType("int");
 
                     b.Property<string>("RelativePath")
                         .HasColumnType("nvarchar(max)");

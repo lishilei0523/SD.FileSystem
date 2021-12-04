@@ -78,6 +78,9 @@ namespace SD.FileSystem.Repository.Migrations
                     b.Property<string>("OperatorName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PartitionIndex")
+                        .HasColumnType("int");
+
                     b.Property<string>("RelativePath")
                         .HasColumnType("nvarchar(max)");
 

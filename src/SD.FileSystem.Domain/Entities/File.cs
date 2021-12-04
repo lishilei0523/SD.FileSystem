@@ -1,4 +1,5 @@
-﻿using SD.Infrastructure.EntityBase;
+﻿using SD.Infrastructure.Constants;
+using SD.Infrastructure.EntityBase;
 using System;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace SD.FileSystem.Domain.Entities
     /// <summary>
     /// 文件
     /// </summary>
-    public class File : AggregateRootEntity
+    public class File : AggregateRootEntity, IPartible
     {
         #region # 构造器
 
@@ -118,6 +119,17 @@ namespace SD.FileSystem.Domain.Entities
         /// 描述
         /// </summary>
         public string Description { get; private set; }
+        #endregion
+
+        #region 分区索引 —— int PartitionIndex
+        /// <summary>
+        /// 分区索引
+        /// </summary>
+        public int PartitionIndex
+        {
+            get => (int)(this.AddedTime.Ticks % GlobalSetting.PartitionsCount);
+            set => value = (int)(this.AddedTime.Ticks % GlobalSetting.PartitionsCount);
+        }
         #endregion
 
         #endregion
