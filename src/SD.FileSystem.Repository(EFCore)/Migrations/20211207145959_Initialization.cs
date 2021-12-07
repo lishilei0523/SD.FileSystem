@@ -19,7 +19,7 @@ namespace SD.FileSystem.Repository.Migrations
                     AbsolutePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HostName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UploadedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UploadedDate = table.Column<DateTime>(type: "DATE", nullable: false),
                     Use = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PartitionIndex = table.Column<int>(type: "int", nullable: false),

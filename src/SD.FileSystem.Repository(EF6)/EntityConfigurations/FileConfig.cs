@@ -21,6 +21,7 @@ namespace SD.FileSystem.Repository.EntityConfigurations
             this.Property(file => file.Name).IsRequired().HasMaxLength(256);
             this.Property(file => file.ExtensionName).IsRequired().HasMaxLength(16);
             this.Property(file => file.HashValue).IsRequired().HasMaxLength(32);
+            this.Property(file => file.UploadedDate).HasColumnType("DATE");
 
             //配置索引
             this.HasIndex("IX_File_AddedTime", IndexType.Clustered, table => table.Property(file => file.AddedTime));

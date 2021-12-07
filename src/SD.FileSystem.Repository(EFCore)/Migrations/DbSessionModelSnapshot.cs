@@ -91,7 +91,7 @@ namespace SD.FileSystem.Repository.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("UploadedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATE");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");

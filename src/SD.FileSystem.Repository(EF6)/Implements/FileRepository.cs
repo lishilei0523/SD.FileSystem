@@ -60,6 +60,8 @@ namespace SD.FileSystem.Repository.Implements
         /// <returns>文件列表</returns>
         public ICollection<File> FindByPage(string keywords, string extensionName, string hashValue, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize, out int rowCount, out int pageCount)
         {
+            uploadedDate = uploadedDate?.Date;
+
             QueryBuilder<File> queryBuilder = QueryBuilder<File>.Affirm();
             if (!string.IsNullOrWhiteSpace(keywords))
             {
@@ -75,18 +77,15 @@ namespace SD.FileSystem.Repository.Implements
             }
             if (uploadedDate.HasValue)
             {
-                DateTime uploadedDate_ = uploadedDate.Value.Date;
-                queryBuilder.And(x => x.UploadedDate == uploadedDate_);
+                queryBuilder.And(x => x.UploadedDate == uploadedDate.Value);
             }
             if (startTime.HasValue)
             {
-                DateTime startTime_ = startTime.Value.Date;
-                queryBuilder.And(x => x.AddedTime >= startTime_);
+                queryBuilder.And(x => x.AddedTime >= startTime.Value);
             }
             if (endTime.HasValue)
             {
-                DateTime endTime_ = endTime.Value.Date;
-                queryBuilder.And(x => x.AddedTime <= endTime_);
+                queryBuilder.And(x => x.AddedTime <= endTime.Value);
             }
 
             Expression<Func<File, bool>> condition = queryBuilder.Build();
