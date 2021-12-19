@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="SD.Infrastructure" Version="3.2.4" />
+    <PackageReference Include="SD.Infrastructure" Version="3.3.0" />
     <PackageReference Include="SD.Infrastructure.Repository.EntityFramework" Version="2.3.0" />
     <PackageReference Include="SD.IdentitySystem.Membership" Version="4.0.1" />
   </ItemGroup>
