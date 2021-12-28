@@ -10,8 +10,8 @@ using SD.FileSystem.Repository.Base;
 namespace SD.FileSystem.Repository.Migrations
 {
     [DbContext(typeof(DbSession))]
-    [Migration("20211207145959_Initialization")]
-    partial class Initialization
+    [Migration("20211228121138_v1.0.1")]
+    partial class v101
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

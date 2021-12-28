@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SD.FileSystem.Repository.Migrations
 {
-    public partial class Initialization : Migration
+    public partial class v101 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
