@@ -38,8 +38,6 @@ CREATE TABLE [File] (
     [Name] nvarchar(256) NOT NULL,
     [Keywords] nvarchar(max) NOT NULL,
     [SavedTime] datetime2 NOT NULL,
-    [Deleted] bit NOT NULL,
-    [DeletedTime] datetime2 NULL,
     [CreatorAccount] nvarchar(max) NULL,
     [CreatorName] nvarchar(max) NULL,
     [OperatorAccount] nvarchar(max) NULL,
@@ -55,7 +53,7 @@ CREATE INDEX [IX_File_HashValue] ON [File] ([HashValue]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20211228121138_v1.0.1', N'5.0.10');
+VALUES (N'20220122085656_v1.1.0', N'5.0.10');
 GO
 
 COMMIT;
