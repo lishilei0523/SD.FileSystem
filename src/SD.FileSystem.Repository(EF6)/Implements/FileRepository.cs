@@ -14,7 +14,7 @@ namespace SD.FileSystem.Repository.Implements
     /// </summary>
     public class FileRepository : EFAggRootRepositoryProvider<File>, IFileRepository
     {
-        #region # 获取实体对象列表 ——override IQueryable<File> FindAllInner()
+        #region # 获取实体对象列表 —— override IQueryable<File> FindAllInner()
         /// <summary>
         /// 获取实体对象列表
         /// </summary>
