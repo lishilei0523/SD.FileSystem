@@ -26,6 +26,10 @@ namespace SD.FileSystem.Repository.EntityConfigurations
             //配置索引
             builder.HasIndex(file => file.AddedTime).IsUnique(false).IsClustered();
             builder.HasIndex(file => file.HashValue).IsUnique(false);
+
+            //忽略映射
+            builder.Ignore(file => file.Deleted);
+            builder.Ignore(file => file.DeletedTime);
         }
     }
 }

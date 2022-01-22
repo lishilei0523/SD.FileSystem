@@ -26,6 +26,10 @@ namespace SD.FileSystem.Repository.EntityConfigurations
             //配置索引
             this.HasIndex("IX_File_AddedTime", IndexType.Clustered, table => table.Property(file => file.AddedTime));
             this.HasIndex("IX_File_HashValue", IndexType.Nonclustered, table => table.Property(file => file.HashValue));
+
+            //忽略映射
+            this.Ignore(file => file.Deleted);
+            this.Ignore(file => file.DeletedTime);
         }
     }
 }

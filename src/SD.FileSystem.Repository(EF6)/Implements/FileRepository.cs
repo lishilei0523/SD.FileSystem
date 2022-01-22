@@ -14,6 +14,17 @@ namespace SD.FileSystem.Repository.Implements
     /// </summary>
     public class FileRepository : EFAggRootRepositoryProvider<File>, IFileRepository
     {
+        #region # 获取实体对象列表 ——override IQueryable<File> FindAllInner()
+        /// <summary>
+        /// 获取实体对象列表
+        /// </summary>
+        /// <returns>实体对象列表</returns>
+        protected override IQueryable<File> FindAllInner()
+        {
+            return base._dbContext.Set<File>();
+        }
+        #endregion
+
         #region # 根据哈希值获取默认文件 —— File DefaultByHash(string hashValue)
         /// <summary>
         /// 根据哈希值获取默认文件
@@ -103,7 +114,7 @@ namespace SD.FileSystem.Repository.Implements
         /// <returns>文件数量</returns>
         public int CountByHash(string hashValue)
         {
-            return base.Count(x => x.HashValue == hashValue);
+            return (int)base.Count(x => x.HashValue == hashValue);
         }
         #endregion
 
