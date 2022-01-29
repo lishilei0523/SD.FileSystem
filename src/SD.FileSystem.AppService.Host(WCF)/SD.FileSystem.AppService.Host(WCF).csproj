@@ -8,9 +8,9 @@
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Copyright>Copyright © SD 2021</Copyright>
-    <Version>2.0.0</Version>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.0.1</Version>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
+    <FileVersion>2.0.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">

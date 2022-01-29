@@ -20,19 +20,5 @@ namespace SD.FileSystem.AppService.Maps
             return fileInfo;
         }
         #endregion
-
-        #region # 文件映射 —— static UploadResponse ToUploadResponse(this File file)
-        /// <summary>
-        /// 文件映射
-        /// </summary>
-        public static UploadResponse ToUploadResponse(this File file)
-        {
-            UploadResponse response = file.Map<File, UploadResponse>();
-            response.FileId = file.Id;
-            response.FileName = file.Name;
-
-            return response;
-        }
-        #endregion
     }
 }

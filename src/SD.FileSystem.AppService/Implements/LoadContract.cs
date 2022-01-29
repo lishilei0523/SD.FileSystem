@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using SD.Common;
-using SD.FileSystem.AppService.Maps;
 using SD.FileSystem.Domain.IRepositories;
 using SD.FileSystem.IAppService.DTOs.Inputs;
 using SD.FileSystem.IAppService.DTOs.Outputs;
@@ -76,7 +75,13 @@ namespace SD.FileSystem.AppService.Implements
             this._unitOfWork.RegisterAdd(file);
             this._unitOfWork.Commit();
 
-            UploadResponse response = file.ToUploadResponse();
+            UploadResponse response = new UploadResponse
+            {
+                FileId = file.Id,
+                FileName = file.Name,
+                HashValue = file.HashValue,
+                Url = file.Url
+            };
 
             return response;
         }
