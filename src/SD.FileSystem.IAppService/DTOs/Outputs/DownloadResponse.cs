@@ -17,12 +17,12 @@ namespace SD.FileSystem.IAppService.DTOs.Outputs
         public string FileName { get; set; }
         #endregion
 
-        #region 内容长度 —— long ContentLength
+        #region 文件大小 —— long Size
         /// <summary>
-        /// 内容长度
+        /// 文件大小
         /// </summary>
         [MessageHeader]
-        public long ContentLength { get; set; }
+        public long Size { get; set; }
         #endregion
 
         #region 用途 —— string Use

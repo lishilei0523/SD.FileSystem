@@ -104,11 +104,10 @@ namespace SD.FileSystem.AppService.Implements
 
             File file = this._fileRepository.Single(request.FileId);
             byte[] buffer = System.IO.File.ReadAllBytes(file.AbsolutePath);
-
             DownloadResponse response = new DownloadResponse
             {
                 FileName = file.Name,
-                ContentLength = file.Size,
+                Size = file.Size,
                 Use = file.Use,
                 Description = file.Description,
                 Datas = new MemoryStream(buffer)

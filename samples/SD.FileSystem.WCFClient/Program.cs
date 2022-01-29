@@ -66,7 +66,7 @@ namespace Sample.Client
             DownloadRequest request = new DownloadRequest(new Guid("A0978EFC-721B-4D46-99CF-87D083108BE6"));
             DownloadResponse response = loadContract.DownloadFile(request);
 
-            byte[] buffer = new byte[response.ContentLength];
+            byte[] buffer = new byte[response.Size];
             response.Datas.Read(buffer);
             File.WriteAllBytes($@"D:\{response.FileName}", buffer);
 
