@@ -18,10 +18,10 @@ namespace Sample.Client
             InitContainer();
 
             //上传
-            UploadFile();
+            //UploadFile();
 
             //下载
-            //DownloadFile();
+            DownloadFile();
 
             Console.ReadKey();
         }
@@ -57,7 +57,7 @@ namespace Sample.Client
         static void DownloadFile()
         {
             ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
-            DownloadRequest request = new DownloadRequest(new Guid("A0978EFC-721B-4D46-99CF-87D083108BE6"));
+            DownloadRequest request = new DownloadRequest(new Guid("CD05E6C4-B195-4221-8CC2-BEEC3A79D2F5"));
             DownloadResponse response = loadContract.DownloadFile(request);
 
             Console.WriteLine("下载成功！");
