@@ -63,6 +63,10 @@ namespace SD.FileSystem.AppService.Implements
             {
                 throw new ArgumentNullException(nameof(request), "上传请求不可为空！");
             }
+            if (!string.IsNullOrWhiteSpace(request.FileName))
+            {
+                throw new InvalidOperationException("文件名称不可为空！");
+            }
             if (request.Datas == null)
             {
                 throw new InvalidOperationException("要上传的文件不可为空！");
