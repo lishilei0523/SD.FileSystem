@@ -55,17 +55,18 @@ namespace SD.FileSystem.AppService.Host
 
             appBuilder.UseServiceModel(builder =>
             {
+                builder.ConfigureServiceHostBase<FileContract>(host => host.Description.Behaviors.AddRange(serviceBehaviors));
                 builder.ConfigureServiceHostBase<LoadContract>(host => host.Description.Behaviors.AddRange(serviceBehaviors));
             });
 
             //配置文件服务器
-            string fileServerRoot = Path.IsPathRooted(AspNetSetting.FileServerPath)
+            string fileServerPath = Path.IsPathRooted(AspNetSetting.FileServerPath)
                 ? AspNetSetting.FileServerPath
                 : Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
-            Directory.CreateDirectory(fileServerRoot);
+            Directory.CreateDirectory(fileServerPath);
             FileServerOptions fileServerOptions = new FileServerOptions
             {
-                FileProvider = new PhysicalFileProvider(fileServerRoot),
+                FileProvider = new PhysicalFileProvider(fileServerPath),
                 EnableDirectoryBrowsing = true
             };
             appBuilder.UseFileServer(fileServerOptions);
