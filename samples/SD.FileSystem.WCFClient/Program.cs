@@ -18,10 +18,10 @@ namespace Sample.Client
             InitContainer();
 
             //上传
-            UploadFile();
+            //UploadFile();
 
             //下载
-            //DownloadFile();
+            DownloadFile();
 
             Console.ReadKey();
         }
@@ -41,34 +41,34 @@ namespace Sample.Client
         {
             string filePath = CreateFile();
             string fileName = Path.GetFileName(filePath);
-
-            FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            UploadRequest file = new UploadRequest
+            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-                FileName = fileName,
-                Use = "用途",
-                Description = "描述",
-                Datas = stream
-            };
+                UploadRequest file = new UploadRequest
+                {
+                    FileName = fileName,
+                    Use = "用途",
+                    Description = "描述",
+                    Datas = stream
+                };
 
-            ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
-            UploadResponse response = loadContract.UploadFile(file);
-            Console.WriteLine(response);
+                ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
+                UploadResponse response = loadContract.UploadFile(file);
+                Console.WriteLine(response);
 
-            stream.Flush();
-            File.Delete(filePath);
+                stream.Flush();
+            }
         }
 
         static void DownloadFile()
         {
             ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
 
-            DownloadRequest request = new DownloadRequest(new Guid("2E21E5E5-4739-421F-8692-D3AF2B32A03F"));
+            DownloadRequest request = new DownloadRequest(new Guid("A0978EFC-721B-4D46-99CF-87D083108BE6"));
             DownloadResponse response = loadContract.DownloadFile(request);
 
             byte[] buffer = new byte[response.ContentLength];
             response.Datas.Read(buffer);
-            File.WriteAllBytes(@"D:\Download.txt", buffer);
+            File.WriteAllBytes($@"D:\{response.FileName}", buffer);
 
             Console.WriteLine(response);
         }
