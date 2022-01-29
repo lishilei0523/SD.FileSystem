@@ -153,7 +153,9 @@ namespace SD.FileSystem.AppService.Implements
             else
             {
                 string timestamp = uploadedDate.ToString(timestampFormat);
-                string fileServerPath = Path.Combine(AppContext.BaseDirectory, AspNetSection.Setting.FileServer.Value);
+                string fileServerPath = Path.IsPathRooted(AspNetSetting.FileServerPath)
+                    ? AspNetSetting.FileServerPath
+                    : Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
                 string storageDirectory = $"{fileServerPath}\\{timestamp}";
                 Directory.CreateDirectory(storageDirectory);
 

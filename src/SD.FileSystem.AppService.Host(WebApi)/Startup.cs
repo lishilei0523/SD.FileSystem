@@ -66,15 +66,21 @@ namespace SD.FileSystem.AppService.Host
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             //配置服务器
-            Directory.CreateDirectory(AspNetSetting.StaticFilesPath);
-            Directory.CreateDirectory(AspNetSetting.FileServerPath);
+            string staticFilesRoot = Path.IsPathRooted(AspNetSetting.StaticFilesPath)
+                ? AspNetSetting.StaticFilesPath
+                : Path.Combine(AppContext.BaseDirectory, AspNetSetting.StaticFilesPath);
+            string fileServerRoot = Path.IsPathRooted(AspNetSetting.FileServerPath)
+                ? AspNetSetting.FileServerPath
+                : Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
+            Directory.CreateDirectory(staticFilesRoot);
+            Directory.CreateDirectory(fileServerRoot);
             StaticFileOptions staticFileOptions = new StaticFileOptions
             {
-                FileSystem = new PhysicalFileSystem(AspNetSetting.StaticFilesPath)
+                FileSystem = new PhysicalFileSystem(staticFilesRoot)
             };
             FileServerOptions fileServerOptions = new FileServerOptions
             {
-                FileSystem = new PhysicalFileSystem(AspNetSetting.FileServerPath),
+                FileSystem = new PhysicalFileSystem(fileServerRoot),
                 EnableDirectoryBrowsing = true
             };
             appBuilder.UseStaticFiles(staticFileOptions);

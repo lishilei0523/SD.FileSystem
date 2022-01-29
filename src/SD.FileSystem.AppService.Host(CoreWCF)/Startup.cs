@@ -13,6 +13,9 @@ using System.Configuration;
 
 namespace SD.FileSystem.AppService.Host
 {
+    /// <summary>
+    /// 应用程序启动器
+    /// </summary>
     public class Startup
     {
         /// <summary>

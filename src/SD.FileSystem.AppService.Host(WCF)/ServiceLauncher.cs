@@ -9,6 +9,9 @@ namespace SD.FileSystem.AppService.Host
     /// </summary>
     public class ServiceLauncher
     {
+        /// <summary>
+        /// 文件上传/下载服务契约主机
+        /// </summary>
         private readonly ServiceHost _loadContractHost;
 
         /// <summary>
