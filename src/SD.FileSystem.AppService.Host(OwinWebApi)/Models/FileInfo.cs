@@ -1,8 +1,8 @@
-﻿using SD.Infrastructure.DTOBase;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
+using SD.Infrastructure.DTOBase;
 
-namespace SD.FileSystem.AppService.Models
+namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
     /// 文件数据传输对象

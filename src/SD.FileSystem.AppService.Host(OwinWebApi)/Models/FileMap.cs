@@ -1,7 +1,7 @@
 ﻿using SD.FileSystem.Domain.Entities;
 using SD.Toolkits.Mapper;
 
-namespace SD.FileSystem.AppService.Models
+namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
     /// 文件映射工具类

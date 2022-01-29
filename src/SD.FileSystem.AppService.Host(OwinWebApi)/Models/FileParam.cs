@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace SD.FileSystem.AppService.Models
+namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
     /// 文件参数模型

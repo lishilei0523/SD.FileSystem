@@ -3,7 +3,7 @@ using SD.IOC.Core.Mediators;
 using SD.IOC.Extension.NetCore;
 using System;
 
-namespace SD.FileSystem.AppService
+namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
     /// 服务定位者

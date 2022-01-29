@@ -16,7 +16,7 @@ using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace SD.FileSystem.AppService
+namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
     /// OWIN启动器

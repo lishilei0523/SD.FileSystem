@@ -1,7 +1,7 @@
 ﻿using SD.Infrastructure;
 using Topshelf;
 
-namespace SD.FileSystem.AppService
+namespace SD.FileSystem.AppService.Host
 {
     class Program
     {

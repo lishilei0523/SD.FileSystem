@@ -15,7 +15,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace SD.FileSystem.AppService
+namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
     /// 应用程序启动器

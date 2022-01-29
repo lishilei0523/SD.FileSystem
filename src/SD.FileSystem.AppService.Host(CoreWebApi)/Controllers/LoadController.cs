@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SD.Common;
-using SD.FileSystem.AppService.Models;
 using SD.FileSystem.Domain.IRepositories;
 using SD.Toolkits.AspNet;
 using SD.Toolkits.AspNetCore.Attributes;
@@ -12,9 +11,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using File = SD.FileSystem.Domain.Entities.File;
-using FileInfo = SD.FileSystem.AppService.Models.FileInfo;
 
-namespace SD.FileSystem.AppService.Controllers
+namespace SD.FileSystem.AppService.Host.Controllers
 {
     /// <summary>
     /// 文件上传/下载控制器

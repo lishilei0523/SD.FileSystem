@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SD.FileSystem.AppService.Models;
 using SD.FileSystem.Domain.Entities;
 using SD.FileSystem.Domain.IRepositories;
 using SD.Infrastructure.DTOBase;
@@ -8,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SD.FileSystem.AppService.Controllers
+namespace SD.FileSystem.AppService.Host.Controllers
 {
     /// <summary>
     /// 文件管理控制器

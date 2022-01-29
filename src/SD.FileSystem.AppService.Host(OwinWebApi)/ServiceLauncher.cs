@@ -2,7 +2,7 @@
 using SD.Toolkits.AspNet;
 using System;
 
-namespace SD.FileSystem.AppService
+namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
     /// 服务启动器
