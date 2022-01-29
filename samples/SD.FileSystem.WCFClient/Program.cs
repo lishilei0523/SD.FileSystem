@@ -18,10 +18,10 @@ namespace Sample.Client
             InitContainer();
 
             //上传
-            //UploadFile();
+            UploadFile();
 
             //下载
-            DownloadFile();
+            //DownloadFile();
 
             Console.ReadKey();
         }
@@ -41,36 +41,36 @@ namespace Sample.Client
         {
             string filePath = CreateFile();
             string fileName = Path.GetFileName(filePath);
-            using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            {
-                UploadRequest file = new UploadRequest
-                {
-                    FileName = fileName,
-                    Use = "用途",
-                    Description = "描述",
-                    Datas = stream
-                };
+            using FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
-                ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
-                UploadResponse response = loadContract.UploadFile(file);
-                Console.WriteLine(response);
+            ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
+            UploadRequest file = new UploadRequest(fileName, stream, "用途", "描述");
+            UploadResponse response = loadContract.UploadFile(file);
 
-                stream.Flush();
-            }
+            Console.WriteLine("上传成功！");
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine($"文件Id：{response.FileId}");
+            Console.WriteLine($"文件名称：{response.FileName}");
+            Console.WriteLine($"链接地址：{response.Url}");
         }
 
         static void DownloadFile()
         {
             ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
-
             DownloadRequest request = new DownloadRequest(new Guid("A0978EFC-721B-4D46-99CF-87D083108BE6"));
             DownloadResponse response = loadContract.DownloadFile(request);
 
+            Console.WriteLine("下载成功！");
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine($"文件名称：{response.FileName}");
+            Console.WriteLine($"文件大小：{response.Size}");
+
+            string filePath = $@"D:\{response.FileName}";
             byte[] buffer = new byte[response.Size];
             response.Datas.Read(buffer);
-            File.WriteAllBytes($@"D:\{response.FileName}", buffer);
+            File.WriteAllBytes(filePath, buffer);
 
-            Console.WriteLine(response);
+            Console.WriteLine($"文件已保存至\"{filePath}\"");
         }
 
         static string CreateFile()

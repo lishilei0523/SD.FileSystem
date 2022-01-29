@@ -25,22 +25,6 @@ namespace SD.FileSystem.IAppService.DTOs.Outputs
         public long Size { get; set; }
         #endregion
 
-        #region 用途 —— string Use
-        /// <summary>
-        /// 用途
-        /// </summary>
-        [MessageHeader]
-        public string Use { get; set; }
-        #endregion
-
-        #region 描述 —— string Description
-        /// <summary>
-        /// 描述
-        /// </summary>
-        [MessageHeader]
-        public string Description { get; set; }
-        #endregion
-
         #region 流数据 —— Stream Datas
         /// <summary>
         /// 流数据

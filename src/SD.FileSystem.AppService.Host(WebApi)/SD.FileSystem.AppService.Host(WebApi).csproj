@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net461;net48</TargetFrameworks>
-    <OutputType>Exe</OutputType>
     <AssemblyName>SD.FileSystem.AppService.Host</AssemblyName>
     <RootNamespace>SD.FileSystem.AppService.Host</RootNamespace>
+    <OutputType>Exe</OutputType>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Authors>Lee</Authors>
     <Company>SD</Company>
@@ -24,9 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="favicon.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    <Content Include="favicon.ico" />
     <Content Include="Content\favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

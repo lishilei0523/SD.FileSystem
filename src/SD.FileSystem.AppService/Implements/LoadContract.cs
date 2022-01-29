@@ -108,8 +108,6 @@ namespace SD.FileSystem.AppService.Implements
             {
                 FileName = file.Name,
                 Size = file.Size,
-                Use = file.Use,
-                Description = file.Description,
                 Datas = new MemoryStream(buffer)
             };
 
