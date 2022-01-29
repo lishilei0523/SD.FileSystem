@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SD.Common;
+using SD.FileSystem.AppService.Maps;
 using SD.FileSystem.Domain.IRepositories;
 using SD.Toolkits.AspNet;
 using SD.Toolkits.AspNetCore.Attributes;
@@ -11,11 +12,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using File = SD.FileSystem.Domain.Entities.File;
+using FileInfo = SD.FileSystem.IAppService.DTOs.Outputs.FileInfo;
 
 namespace SD.FileSystem.AppService.Host.Controllers
 {
     /// <summary>
-    /// 文件上传/下载控制器
+    /// 文件上传/下载WebApi接口
     /// </summary>
     [ApiController]
     [Route("Api/[controller]/[action]")]
@@ -129,16 +131,16 @@ namespace SD.FileSystem.AppService.Host.Controllers
 
         //查询部分
 
-        #region # 下载文件 —— FileContentResult DownloadFile(string hashValue)
+        #region # 下载文件 —— FileContentResult DownloadFile(Guid fileId)
         /// <summary>
         /// 下载文件
         /// </summary>
-        /// <param name="hashValue">哈希值</param>
+        /// <param name="fileId">文件Id</param>
         /// <returns>文件数据</returns>
         [HttpGet]
-        public FileContentResult DownloadFile(string hashValue)
+        public FileContentResult DownloadFile(Guid fileId)
         {
-            File file = this._fileRepository.DefaultByHash(hashValue);
+            File file = this._fileRepository.Single(fileId);
             byte[] buffer = System.IO.File.ReadAllBytes(file.AbsolutePath);
             const string contentType = "application/octet-stream";
 

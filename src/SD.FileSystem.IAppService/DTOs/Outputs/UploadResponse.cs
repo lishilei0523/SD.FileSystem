@@ -1,20 +1,35 @@
 ﻿using System;
-using System.Runtime.Serialization;
-using SD.Infrastructure.DTOBase;
+using System.ServiceModel;
 
-namespace SD.FileSystem.AppService.Host
+namespace SD.FileSystem.IAppService.DTOs.Outputs
 {
     /// <summary>
-    /// 文件数据传输对象
+    /// 上传响应
     /// </summary>
-    [DataContract]
-    public class FileInfo : BaseDTO
+    [MessageContract]
+    public class UploadResponse
     {
+        #region 文件Id —— Guid FileId
+        /// <summary>
+        /// 文件Id
+        /// </summary>
+        [MessageHeader]
+        public Guid FileId { get; set; }
+        #endregion
+
+        #region 文件名称 —— string FileName
+        /// <summary>
+        /// 文件名称
+        /// </summary>
+        [MessageHeader]
+        public string FileName { get; set; }
+        #endregion
+
         #region 扩展名 —— string ExtensionName
         /// <summary>
         /// 扩展名
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string ExtensionName { get; set; }
         #endregion
 
@@ -22,7 +37,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 文件大小
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public long Size { get; set; }
         #endregion
 
@@ -30,7 +45,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 哈希值
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string HashValue { get; set; }
         #endregion
 
@@ -38,7 +53,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 相对路径
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string RelativePath { get; set; }
         #endregion
 
@@ -46,7 +61,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 绝对路径
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string AbsolutePath { get; set; }
         #endregion
 
@@ -54,7 +69,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 主机名称
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string HostName { get; set; }
         #endregion
 
@@ -62,7 +77,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 链接地址
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string Url { get; set; }
         #endregion
 
@@ -70,7 +85,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 上传日期
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public DateTime UploadedDate { get; set; }
         #endregion
 
@@ -78,7 +93,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 用途
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string Use { get; set; }
         #endregion
 
@@ -86,7 +101,7 @@ namespace SD.FileSystem.AppService.Host
         /// <summary>
         /// 描述
         /// </summary>
-        [DataMember]
+        [MessageHeader]
         public string Description { get; set; }
         #endregion
     }

@@ -1,20 +1,29 @@
-﻿using SD.FileSystem.Domain.Entities;
-using SD.FileSystem.Domain.IRepositories;
-using SD.Infrastructure.DTOBase;
-using SD.Toolkits.WebApi.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Http;
+using SD.FileSystem.AppService.Maps;
+using SD.FileSystem.Domain.Entities;
+using SD.FileSystem.Domain.IRepositories;
+using SD.FileSystem.IAppService.DTOs.Inputs;
+using SD.FileSystem.IAppService.DTOs.Outputs;
+using SD.FileSystem.IAppService.Interfaces;
+using SD.Infrastructure.DTOBase;
+#if NET40_OR_GREATER
+using System.ServiceModel;
+#endif
+#if NETSTANDARD2_0_OR_GREATER
+using CoreWCF;
+#endif
 
-namespace SD.FileSystem.AppService.Host.Controllers
+namespace SD.FileSystem.AppService.Implements
 {
     /// <summary>
-    /// 文件管理控制器
+    /// 文件管理服务契约实现
     /// </summary>
-    public class FileController : ApiController
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+    public class FileContract : IFileContract
     {
-        #region # 字段及构造器
+        #region # 字段及依赖注入构造器
 
         /// <summary>
         /// 文件仓储接口
@@ -22,14 +31,14 @@ namespace SD.FileSystem.AppService.Host.Controllers
         private readonly IFileRepository _fileRepository;
 
         /// <summary>
-        /// 工作单元
+        /// 单元事务
         /// </summary>
         private readonly IUnitOfWorkFile _unitOfWork;
 
         /// <summary>
         /// 依赖注入构造器
         /// </summary>
-        public FileController(IFileRepository fileRepository, IUnitOfWorkFile unitOfWork)
+        public FileContract(IFileRepository fileRepository, IUnitOfWorkFile unitOfWork)
         {
             this._fileRepository = fileRepository;
             this._unitOfWork = unitOfWork;
@@ -56,8 +65,6 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// <param name="url">链接地址</param>
         /// <param name="uploadedDate">上传日期</param>
         /// <param name="description">描述</param>
-        [HttpPost]
-        [WrapPostParameters]
         public void UpdateFile(Guid fileId, string fileName, string extensionName, long size, string hashValue, string relativePath, string absolutePath, string hostName, string url, DateTime uploadedDate, string use, string description)
         {
             File file = this._unitOfWork.Resolve<File>(fileId);
@@ -73,8 +80,6 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// 批量修改文件
         /// </summary>
         /// <param name="fileParams">文件参数模型字典</param>
-        [HttpPost]
-        [WrapPostParameters]
         public void UpdateFiles(IDictionary<Guid, FileParam> fileParams)
         {
             #region # 验证
@@ -91,7 +96,7 @@ namespace SD.FileSystem.AppService.Host.Controllers
             foreach (File file in files)
             {
                 FileParam fileParam = fileParams[file.Id];
-                file.UpdateInfo(fileParam.FileName, fileParam.ExtensionName, fileParam.Size, fileParam.HashValue, fileParam.RelativePath, fileParam.AbsolutePath, fileParam.HostName, fileParam.Url, fileParam.UploadedDate, fileParam.Use, fileParam.Description);
+                file.UpdateInfo(fileParam.fileName, fileParam.extensionName, fileParam.size, fileParam.hashValue, fileParam.relativePath, fileParam.absolutePath, fileParam.hostName, fileParam.url, fileParam.uploadedDate, fileParam.use, fileParam.description);
             }
 
             this._unitOfWork.RegisterSaveRange(files);
@@ -104,8 +109,6 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// 删除文件
         /// </summary>
         /// <param name="fileId">文件Id</param>
-        [HttpPost]
-        [WrapPostParameters]
         public void RemoveFile(Guid fileId)
         {
             File file = this._unitOfWork.Resolve<File>(fileId);
@@ -127,13 +130,11 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// 批量删除文件
         /// </summary>
         /// <param name="fileIds">文件Id集</param>
-        [HttpPost]
-        [WrapPostParameters]
         public void RemoveFiles(IEnumerable<Guid> fileIds)
         {
             #region # 验证
 
-            fileIds = fileIds?.Distinct().ToArray() ?? new Guid[0];
+            fileIds = fileIds?.Distinct().ToArray() ?? Array.Empty<Guid>();
             if (!fileIds.Any())
             {
                 return;
@@ -167,7 +168,6 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// </summary>
         /// <param name="fileId">文件Id</param>
         /// <returns>文件</returns>
-        [HttpGet]
         public FileInfo GetFile(Guid fileId)
         {
             File file = this._fileRepository.Single(fileId);
@@ -190,7 +190,6 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">页容量</param>
         /// <returns>文件列表</returns>
-        [HttpGet]
         public PageModel<FileInfo> GetFilesByPage(string keywords, string extensionName, string hashValue, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize)
         {
             ICollection<File> files = this._fileRepository.FindByPage(keywords, extensionName, hashValue, uploadedDate, startTime, endTime, pageIndex, pageSize, out int rowCount, out int pageCount);

@@ -1,84 +1,84 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace SD.FileSystem.AppService.Host
+namespace SD.FileSystem.IAppService.DTOs.Inputs
 {
     /// <summary>
     /// 文件参数模型
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "http://SD.FileSystem.IAppService.DTOs.Inputs")]
     public struct FileParam
     {
         /// <summary>
         /// 文件Id
         /// </summary>
         [DataMember]
-        public Guid FileId;
+        public Guid fileId;
 
         /// <summary>
         /// 文件名
         /// </summary>
         [DataMember]
-        public string FileName;
+        public string fileName;
 
         /// <summary>
         /// 扩展名
         /// </summary>
         [DataMember]
-        public string ExtensionName;
+        public string extensionName;
 
         /// <summary>
         /// 文件大小
         /// </summary>
         [DataMember]
-        public long Size;
+        public long size;
 
         /// <summary>
         /// 哈希值
         /// </summary>
         [DataMember]
-        public string HashValue;
+        public string hashValue;
 
         /// <summary>
         /// 相对路径
         /// </summary>
         [DataMember]
-        public string RelativePath;
+        public string relativePath;
 
         /// <summary>
         /// 绝对路径
         /// </summary>
         [DataMember]
-        public string AbsolutePath;
+        public string absolutePath;
 
         /// <summary>
         /// 主机名称
         /// </summary>
         [DataMember]
-        public string HostName;
+        public string hostName;
 
         /// <summary>
         /// 链接地址
         /// </summary>
         [DataMember]
-        public string Url;
+        public string url;
 
         /// <summary>
         /// 上传日期
         /// </summary>
         [DataMember]
-        public DateTime UploadedDate;
+        public DateTime uploadedDate;
 
         /// <summary>
         /// 用途
         /// </summary>
         [DataMember]
-        public string Use;
+        public string use;
 
         /// <summary>
         /// 描述
         /// </summary>
         [DataMember]
-        public string Description;
+        public string description;
     }
 }

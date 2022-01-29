@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>SD.FileSystem.IAppService</id>
+    <version>2.0.0</version>
+    <title>SD.FileSystem.IAppService</title>
+    <authors>Lee</authors>
+    <description>SD.FileSystem 文件管理系统服务接口</description>
+  </metadata>
+
+  <files>
+    <file src="*.transform" target="content" />
+  </files>
+</package>

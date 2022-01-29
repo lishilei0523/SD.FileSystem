@@ -1,0 +1,15 @@
+﻿<configuration>
+  <sd.ioc>
+    <wcfInterfaces>
+      <assembly name="SD.FileSystem.IAppService" />
+    </wcfInterfaces>
+  </sd.ioc>
+  <system.serviceModel>
+    <client>
+      <!--文件管理服务契约配置-->
+      <endpoint address="net.tcp://localhost:49870/Hosts/FileContract.svc" binding="netTcpBinding" bindingConfiguration="TcpBinding" contract="SD.FileSystem.IAppService.Interfaces.IFileContract" name="SD.FileSystem.IAppService.Interfaces.IFileContract" behaviorConfiguration="DefaultBehavior" />
+      <!--文件上传/下载服务契约配置-->
+      <endpoint address="net.tcp://localhost:49870/Hosts/LoadContract.svc" binding="netTcpBinding" bindingConfiguration="TcpBinding" contract="SD.FileSystem.IAppService.Interfaces.ILoadContract" name="SD.FileSystem.IAppService.Interfaces.ILoadContract" behaviorConfiguration="DefaultBehavior" />
+    </client>
+  </system.serviceModel>
+</configuration>

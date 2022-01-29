@@ -1,39 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SD.FileSystem.IAppService.DTOs.Inputs;
+﻿using SD.FileSystem.IAppService.DTOs.Inputs;
 using SD.FileSystem.IAppService.DTOs.Outputs;
-using SD.FileSystem.IAppService.Interfaces;
+using SD.Infrastructure.AppServiceBase;
 using SD.Infrastructure.DTOBase;
-using SD.Toolkits.AspNetCore.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 
-namespace SD.FileSystem.AppService.Host.Controllers
+namespace SD.FileSystem.IAppService.Interfaces
 {
     /// <summary>
-    /// 文件管理WebApi接口
+    /// 文件管理服务契约接口
     /// </summary>
-    [ApiController]
-    [Route("Api/[controller]/[action]")]
-    public class FileController : ControllerBase
+    [ServiceContract(Namespace = "http://SD.FileSystem.IAppService.Interfaces")]
+    public interface IFileContract : IApplicationService
     {
-        #region # 字段及构造器
-
-        /// <summary>
-        /// 文件管理服务契约接口
-        /// </summary>
-        private readonly IFileContract _fileContract;
-
-        /// <summary>
-        /// 依赖注入构造器
-        /// </summary>
-        public FileController(IFileContract fileContract)
-        {
-            this._fileContract = fileContract;
-        }
-
-        #endregion
-
-
         //命令部分
 
         #region # 修改文件 —— void UpdateFile(Guid fileId, string fileName...
@@ -52,12 +32,8 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// <param name="url">链接地址</param>
         /// <param name="uploadedDate">上传日期</param>
         /// <param name="description">描述</param>
-        [HttpPost]
-        [WrapPostParameters]
-        public void UpdateFile(Guid fileId, string fileName, string extensionName, long size, string hashValue, string relativePath, string absolutePath, string hostName, string url, DateTime uploadedDate, string use, string description)
-        {
-            this._fileContract.UpdateFile(fileId, fileName, extensionName, size, hashValue, relativePath, absolutePath, hostName, url, uploadedDate, use, description);
-        }
+        [OperationContract]
+        void UpdateFile(Guid fileId, string fileName, string extensionName, long size, string hashValue, string relativePath, string absolutePath, string hostName, string url, DateTime uploadedDate, string use, string description);
         #endregion
 
         #region # 批量修改文件 —— void UpdateFiles({Guid, FileParam} fileParams)
@@ -65,12 +41,8 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// 批量修改文件
         /// </summary>
         /// <param name="fileParams">文件参数模型字典</param>
-        [HttpPost]
-        [WrapPostParameters]
-        public void UpdateFiles(IDictionary<Guid, FileParam> fileParams)
-        {
-            this._fileContract.UpdateFiles(fileParams);
-        }
+        [OperationContract]
+        void UpdateFiles(IDictionary<Guid, FileParam> fileParams);
         #endregion
 
         #region # 删除文件 —— void RemoveFile(Guid fileId)
@@ -78,12 +50,8 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// 删除文件
         /// </summary>
         /// <param name="fileId">文件Id</param>
-        [HttpPost]
-        [WrapPostParameters]
-        public void RemoveFile(Guid fileId)
-        {
-            this._fileContract.RemoveFile(fileId);
-        }
+        [OperationContract]
+        void RemoveFile(Guid fileId);
         #endregion
 
         #region # 批量删除文件 —— void RemoveFiles(IEnumerable<Guid> fileIds)
@@ -91,12 +59,8 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// 批量删除文件
         /// </summary>
         /// <param name="fileIds">文件Id集</param>
-        [HttpPost]
-        [WrapPostParameters]
-        public void RemoveFiles(IEnumerable<Guid> fileIds)
-        {
-            this._fileContract.RemoveFiles(fileIds);
-        }
+        [OperationContract]
+        void RemoveFiles(IEnumerable<Guid> fileIds);
         #endregion
 
 
@@ -108,11 +72,8 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// </summary>
         /// <param name="fileId">文件Id</param>
         /// <returns>文件</returns>
-        [HttpGet]
-        public FileInfo GetFile(Guid fileId)
-        {
-            return this._fileContract.GetFile(fileId);
-        }
+        [OperationContract]
+        FileInfo GetFile(Guid fileId);
         #endregion
 
         #region # 分页获取文件列表 —— PageModel<FileInfo> GetFilesByPage(string keywords...
@@ -128,11 +89,8 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">页容量</param>
         /// <returns>文件列表</returns>
-        [HttpGet]
-        public PageModel<FileInfo> GetFilesByPage(string keywords, string extensionName, string hashValue, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize)
-        {
-            return this._fileContract.GetFilesByPage(keywords, extensionName, hashValue, uploadedDate, startTime, endTime, pageIndex, pageSize);
-        }
+        [OperationContract]
+        PageModel<FileInfo> GetFilesByPage(string keywords, string extensionName, string hashValue, DateTime? uploadedDate, DateTime? startTime, DateTime? endTime, int pageIndex, int pageSize);
         #endregion
     }
 }
