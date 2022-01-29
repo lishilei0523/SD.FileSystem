@@ -3,7 +3,6 @@ using SD.FileSystem.IAppService.DTOs.Inputs;
 using SD.FileSystem.IAppService.DTOs.Outputs;
 using SD.FileSystem.IAppService.Interfaces;
 using SD.IOC.Core.Mediators;
-using SD.IOC.Extension.NetCore;
 using SD.IOC.Extension.NetCore.ServiceModel;
 using System;
 using System.IO;
@@ -17,10 +16,10 @@ namespace SD.FileSystem.WCFClient
             //初始化依赖注入
             InitContainer();
 
-            //上传
+            //上传文件
             //UploadFile();
 
-            //下载
+            //下载文件
             DownloadFile();
 
             Console.ReadKey();
@@ -28,10 +27,13 @@ namespace SD.FileSystem.WCFClient
 
         static void InitContainer()
         {
-            IServiceCollection serviceCollection = ResolveMediator.GetServiceCollection();
-            serviceCollection.RegisterConfigs();
-            serviceCollection.RegisterServiceModels();
-            ResolveMediator.Build();
+            if (!ResolveMediator.ContainerBuilt)
+            {
+                IServiceCollection serviceCollection = ResolveMediator.GetServiceCollection();
+                serviceCollection.RegisterServiceModels();
+
+                ResolveMediator.Build();
+            }
 
             Console.WriteLine("依赖注入已初始化！");
             Console.WriteLine("-------------------------------------");
@@ -44,8 +46,8 @@ namespace SD.FileSystem.WCFClient
             using FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
             ILoadContract loadContract = ResolveMediator.Resolve<ILoadContract>();
-            UploadRequest file = new UploadRequest(fileName, stream, "用途", "描述");
-            UploadResponse response = loadContract.UploadFile(file);
+            UploadRequest request = new UploadRequest(fileName, stream, "用途", "描述");
+            UploadResponse response = loadContract.UploadFile(request);
 
             Console.WriteLine("上传成功！");
             Console.WriteLine("-------------------------------");
@@ -75,12 +77,13 @@ namespace SD.FileSystem.WCFClient
 
         static string CreateFile()
         {
-            string text = "ReadMe";
-            string path = @"D:\ReadMe.txt";
+            string fileName = Guid.NewGuid().ToString();
+            string filePath = $@"D:\{fileName}.txt";
+            string text = "Hello World !";
 
-            File.WriteAllText(path, text);
+            File.WriteAllText(filePath, text);
 
-            return path;
+            return filePath;
         }
     }
 }
