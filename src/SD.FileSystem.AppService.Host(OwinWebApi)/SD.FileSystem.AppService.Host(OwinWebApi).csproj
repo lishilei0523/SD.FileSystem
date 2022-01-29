@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>net461;net48</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <AssemblyName>SD.FileSystem.AppService</AssemblyName>
-    <RootNamespace>SD.FileSystem.AppService</RootNamespace>
+    <AssemblyName>SD.FileSystem.AppService.Host</AssemblyName>
+    <RootNamespace>SD.FileSystem.AppService.Host</RootNamespace>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Authors>Lee</Authors>
     <Company>SD</Company>

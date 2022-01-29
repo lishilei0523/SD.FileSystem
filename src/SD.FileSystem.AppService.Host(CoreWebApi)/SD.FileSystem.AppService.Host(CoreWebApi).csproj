@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <NoDefaultLaunchSettingsFile>True</NoDefaultLaunchSettingsFile>
-    <AssemblyName>SD.FileSystem.AppService</AssemblyName>
-    <RootNamespace>SD.FileSystem.AppService</RootNamespace>
+    <AssemblyName>SD.FileSystem.AppService.Host</AssemblyName>
+    <RootNamespace>SD.FileSystem.AppService.Host</RootNamespace>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Authors>Lee</Authors>
     <Company>SD</Company>
@@ -39,20 +39,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\SD.FileSystem.AppService(OwinWebApi)\Models\FileInfo.cs">
+    <Compile Include="..\SD.FileSystem.AppService.Host(OwinWebApi)\Models\FileInfo.cs">
       <Link>Models\FileInfo.cs</Link>
     </Compile>
-    <Compile Include="..\SD.FileSystem.AppService(OwinWebApi)\Models\FileMap.cs">
+    <Compile Include="..\SD.FileSystem.AppService.Host(OwinWebApi)\Models\FileMap.cs">
       <Link>Models\FileMap.cs</Link>
     </Compile>
-    <Compile Include="..\SD.FileSystem.AppService(OwinWebApi)\Models\FileParam.cs">
+    <Compile Include="..\SD.FileSystem.AppService.Host(OwinWebApi)\Models\FileParam.cs">
       <Link>Models\FileParam.cs</Link>
     </Compile>
-    <Content Include="..\SD.FileSystem.AppService(OwinWebApi)\Content\favicon.ico">
+    <Content Include="..\SD.FileSystem.AppService.Host(OwinWebApi)\Content\favicon.ico">
       <Link>Content\favicon.ico</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\SD.FileSystem.AppService(OwinWebApi)\Content\Index.html">
+    <Content Include="..\SD.FileSystem.AppService.Host(OwinWebApi)\Content\Index.html">
       <Link>Content\Index.html</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
