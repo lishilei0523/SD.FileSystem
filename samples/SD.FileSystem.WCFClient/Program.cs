@@ -8,7 +8,7 @@ using SD.IOC.Extension.NetCore.ServiceModel;
 using System;
 using System.IO;
 
-namespace Sample.Client
+namespace SD.FileSystem.WCFClient
 {
     class Program
     {
