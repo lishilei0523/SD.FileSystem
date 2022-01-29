@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using SD.Common;
 using SD.FileSystem.AppService.Maps;
 using SD.FileSystem.Domain.IRepositories;
@@ -131,8 +132,6 @@ namespace SD.FileSystem.AppService.Implements
             const string timestampFormat = "yyyyMMdd";
             string fileName = request.FileName;
             string extensionName = Path.GetExtension(request.FileName);
-            long size = request.ContentLength;
-
             byte[] fileBuffer;
             using (MemoryStream stream = new MemoryStream())
             {
@@ -142,7 +141,7 @@ namespace SD.FileSystem.AppService.Implements
 
             string hashValue = fileBuffer.ToMD5();
             DateTime uploadedDate = DateTime.Today;
-            File file = new File(fileName, extensionName, size, hashValue, uploadedDate, request.Use, request.Description);
+            File file = new File(fileName, extensionName, fileBuffer.Length, hashValue, uploadedDate, request.Use, request.Description);
 
             //哈希值比对
             File existedFile = this._fileRepository.DefaultByHash(hashValue);
@@ -159,10 +158,11 @@ namespace SD.FileSystem.AppService.Implements
                 string storageDirectory = $"{fileServerPath}\\{timestamp}";
                 Directory.CreateDirectory(storageDirectory);
 
-                Uri requestUri = OperationContext.Current.RequestContext.RequestMessage.Headers.To;
+                string host = OperationContext.Current.RequestContext.RequestMessage.Headers.To.Host;
+                int port = AspNetSetting.HttpPorts.First();
                 string relativePath = $"{timestamp}/{file.Number}";
                 string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
-                string hostName = $"http://{requestUri.Host}:{requestUri.Port}";
+                string hostName = $"http://{host}:{port}";
                 string fileUrl = $"{hostName}/{relativePath}";
 
                 System.IO.File.WriteAllBytes(absolutePath, fileBuffer);

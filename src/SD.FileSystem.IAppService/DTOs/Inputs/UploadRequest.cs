@@ -17,14 +17,6 @@ namespace SD.FileSystem.IAppService.DTOs.Inputs
         public string FileName { get; set; }
         #endregion
 
-        #region 内容长度 —— long ContentLength
-        /// <summary>
-        /// 内容长度
-        /// </summary>
-        [MessageHeader]
-        public long ContentLength { get; set; }
-        #endregion
-
         #region 用途 —— string Use
         /// <summary>
         /// 用途

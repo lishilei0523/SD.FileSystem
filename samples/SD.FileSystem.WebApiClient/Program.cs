@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace SD.FileSystem.WindowsClient
+namespace SD.FileSystem.WebApiClient
 {
     class Program
     {

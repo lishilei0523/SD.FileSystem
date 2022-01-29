@@ -27,6 +27,7 @@ namespace SD.FileSystem.AppService.Host
         /// </summary>
         public void Start()
         {
+            //启动WCF服务
             this._loadContractHost.Open();
 
             Console.WriteLine("服务已启动...");
@@ -37,6 +38,7 @@ namespace SD.FileSystem.AppService.Host
         /// </summary>
         public void Stop()
         {
+            //关闭WCF服务
             this._loadContractHost.Close();
 
             Console.WriteLine("服务已关闭...");
