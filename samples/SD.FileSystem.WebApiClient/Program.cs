@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Net.Mime;
 using FileInfo = SD.FileSystem.IAppService.DTOs.Outputs.FileInfo;
 
 namespace SD.FileSystem.WebApiClient
@@ -15,10 +17,10 @@ namespace SD.FileSystem.WebApiClient
             //UploadFile();
 
             //上传多文件
-            UploadFiles();
+            //UploadFiles();
 
             //下载文件
-            //DownloadFile();
+            DownloadFile();
 
             Console.ReadKey();
         }
@@ -109,9 +111,10 @@ namespace SD.FileSystem.WebApiClient
 
         static void DownloadFile()
         {
-            Guid fileId = new Guid("CD05E6C4-B195-4221-8CC2-BEEC3A79D2F5");
+            Guid fileId = new Guid("2D2255B1-DDB7-4A1C-95DC-E55CA0EE511C");
 
             string url = "http://localhost:49871/Api/Load/DownloadFile";
+
             RestClient httpClient = new RestClient(url);
 
             RestRequest request = new RestRequest(Method.GET);
@@ -120,11 +123,28 @@ namespace SD.FileSystem.WebApiClient
             IRestResponse response = httpClient.Execute(request);
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                Console.WriteLine("下载成功！\n" + response.Content);
+                const string contentDispositionName = "Content-Disposition";
+                Parameter contentDispositionParam = response.Headers.Single(x => x.Name == contentDispositionName);
+                string contentDispositionText = contentDispositionParam.Value?.ToString();
+                ContentDisposition contentDisposition = new ContentDisposition(contentDispositionText);
+                string fileName = contentDisposition.FileName;
+                byte[] buffer = response.RawBytes;
+
+                Console.WriteLine("下载成功！");
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine($"文件名称：{fileName}");
+                Console.WriteLine($"文件大小：{buffer.Length}");
+
+                string filePath = $@"D:\{fileName}";
+                File.WriteAllBytes(filePath, buffer);
+
+                Console.WriteLine($"文件已保存至\"{filePath}\"");
             }
             else
             {
-                Console.WriteLine("下载失败！\n" + response.Content);
+                Console.WriteLine("下载失败！");
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine(response.Content);
             }
         }
 
