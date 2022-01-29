@@ -151,10 +151,9 @@ namespace SD.FileSystem.AppService.Implements
                     //删除物理文件
                     System.IO.File.Delete(file.AbsolutePath);
                 }
-
-                this._unitOfWork.RegisterPhysicsRemove(file);
             }
 
+            this._unitOfWork.RegisterPhysicsRemoveRange(files);
             this._unitOfWork.Commit();
         }
         #endregion
