@@ -14,10 +14,10 @@ namespace SD.FileSystem.WebApiClient
         static void Main(string[] args)
         {
             //上传单文件
-            //UploadFile();
+            UploadFile();
 
             //上传多文件
-            //UploadFiles();
+            UploadFiles();
 
             //下载文件
             DownloadFile();

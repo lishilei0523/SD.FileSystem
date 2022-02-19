@@ -17,7 +17,7 @@ namespace SD.FileSystem.WCFClient
             InitContainer();
 
             //上传文件
-            //UploadFile();
+            UploadFile();
 
             //下载文件
             DownloadFile();

@@ -1,25 +1,32 @@
-﻿using Topshelf;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using SD.Toolkits.AspNet;
 
 namespace SD.FileSystem.WebClient
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
-            HostFactory.Run(config =>
-            {
-                config.Service<ServiceLauncher>(host =>
-                {
-                    host.ConstructUsing(name => new ServiceLauncher());
-                    host.WhenStarted(launcher => launcher.Start());
-                    host.WhenStopped(launcher => launcher.Stop());
-                });
-                config.RunAsLocalSystem();
+            IHostBuilder hostBuilder = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder();
 
-                config.SetServiceName("SD.FileSystem.WebClient");
-                config.SetDisplayName("SD.FileSystem.WebClient");
-                config.SetDescription("SD.FileSystem.WebClient");
+            //WebHost配置
+            hostBuilder.ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseKestrel(options =>
+                {
+                    foreach (int httpPort in AspNetSetting.HttpPorts)
+                    {
+                        options.ListenAnyIP(httpPort);
+                    }
+                });
+
+                webBuilder.UseWebRoot(AspNetSetting.StaticFilesPath);
+                webBuilder.UseStartup<Startup>();
             });
+
+            IHost host = hostBuilder.Build();
+            host.Run();
         }
     }
 }
