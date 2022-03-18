@@ -171,7 +171,6 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// <returns>文件</returns>
         private File ProcessFile(string use, string description, IFormFile formFile)
         {
-            const string timestampFormat = "yyyyMMdd";
             string fileName = formFile.FileName;
             string extensionName = Path.GetExtension(formFile.FileName);
             long size = formFile.ContentLength;
@@ -187,14 +186,13 @@ namespace SD.FileSystem.AppService.Host.Controllers
             }
             else
             {
-                string timestamp = uploadedDate.ToString(timestampFormat);
                 string fileServerPath = Path.IsPathRooted(AspNetSetting.FileServerPath)
                     ? AspNetSetting.FileServerPath
                     : Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
-                string storageDirectory = $"{fileServerPath}\\{timestamp}";
+                string storageDirectory = $"{fileServerPath}\\{uploadedDate.Year}\\{uploadedDate.Month}\\{uploadedDate.Day}";
                 Directory.CreateDirectory(storageDirectory);
 
-                string relativePath = $"{timestamp}/{file.Number}";
+                string relativePath = $"{uploadedDate.Year}/{uploadedDate.Month}/{uploadedDate.Day}/{file.Number}";
                 string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
                 string hostName = $"http://{this.Request.RequestUri.Host}:{this.Request.RequestUri.Port}";
                 string fileUrl = $"{hostName}/{relativePath}";

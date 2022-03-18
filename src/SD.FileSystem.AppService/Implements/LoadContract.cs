@@ -135,7 +135,6 @@ namespace SD.FileSystem.AppService.Implements
         /// <returns>文件</returns>
         private File ProcessFile(UploadRequest request)
         {
-            const string timestampFormat = "yyyyMMdd";
             string fileName = request.FileName;
             string extensionName = Path.GetExtension(request.FileName);
             byte[] fileBuffer;
@@ -157,16 +156,15 @@ namespace SD.FileSystem.AppService.Implements
             }
             else
             {
-                string timestamp = uploadedDate.ToString(timestampFormat);
                 string fileServerPath = Path.IsPathRooted(AspNetSetting.FileServerPath)
                     ? AspNetSetting.FileServerPath
                     : Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
-                string storageDirectory = $"{fileServerPath}\\{timestamp}";
+                string storageDirectory = $"{fileServerPath}\\{uploadedDate.Year}\\{uploadedDate.Month}\\{uploadedDate.Day}";
                 Directory.CreateDirectory(storageDirectory);
 
                 string host = OperationContext.Current.RequestContext.RequestMessage.Headers.To.Host;
                 int port = AspNetSetting.HttpPorts.First();
-                string relativePath = $"{timestamp}/{file.Number}";
+                string relativePath = $"{uploadedDate.Year}/{uploadedDate.Month}/{uploadedDate.Day}/{file.Number}";
                 string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
                 string hostName = $"http://{host}:{port}";
                 string fileUrl = $"{hostName}/{relativePath}";
