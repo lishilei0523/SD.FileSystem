@@ -28,6 +28,7 @@ namespace SD.FileSystem.AppService.Host
         {
             //添加WCF服务
             services.AddServiceModelServices();
+            services.AddServiceModelMetadata();
 
             //添加WCF配置
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -40,11 +41,15 @@ namespace SD.FileSystem.AppService.Host
         public void Configure(IApplicationBuilder appBuilder)
         {
             //配置WCF服务
+            ServiceMetadataBehavior metadataBehavior = appBuilder.ApplicationServices.GetRequiredService<ServiceMetadataBehavior>();
+            metadataBehavior.HttpGetEnabled = true;
+            metadataBehavior.HttpsGetEnabled = true;
+            UseRequestHeadersForMetadataAddressBehavior addressBehavior = new UseRequestHeadersForMetadataAddressBehavior();
             DependencyInjectionBehavior dependencyInjectionBehavior = new DependencyInjectionBehavior();
             InitializationBehavior initializationBehavior = new InitializationBehavior();
             IList<IServiceBehavior> serviceBehaviors = new List<IServiceBehavior>
             {
-                dependencyInjectionBehavior, initializationBehavior
+                addressBehavior, dependencyInjectionBehavior, initializationBehavior
             };
 
             if (AspNetSetting.Authorized)
