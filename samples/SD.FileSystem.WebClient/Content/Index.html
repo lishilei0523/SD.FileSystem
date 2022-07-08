@@ -6,7 +6,7 @@
     <script src="Scripts/jquery-1.12.4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         //上传单文件
-        function uploadFile() {
+        function uploadSingleFile() {
             var use = document.uploadFile.use.value;
             var description = document.uploadFile.description.value;
             var formFile = document.uploadFile.formFile.files[0];
@@ -29,7 +29,7 @@
         }
 
         //上传多文件
-        function uploadFiles() {
+        function uploadMultiFiles() {
             var use = document.uploadFiles.use.value;
             var description = document.uploadFiles.description.value;
             var formFiles = document.uploadFiles.formFiles.files;
@@ -67,7 +67,7 @@
         <p>用途：<input type="text" name="use" /></p>
         <p>描述：<input type="text" name="description" /></p>
         <p>文件：<input type="file" name="formFile" /></p>
-        <p><input type="button" value="提交" onclick="uploadFile();" /></p>
+        <p><input type="button" value="提交" onclick="uploadSingleFile();" /></p>
     </form>
     <hr />
     <hr />
@@ -76,7 +76,7 @@
         <p>用途：<input type="text" name="use" /></p>
         <p>描述：<input type="text" name="description" /></p>
         <p>文件列表：<input type="file" name="formFiles" multiple="multiple" /></p>
-        <p><input type="button" value="提交" onclick="uploadFiles();" /></p>
+        <p><input type="button" value="提交" onclick="uploadMultiFiles();" /></p>
     </form>
     <hr />
     <hr />
