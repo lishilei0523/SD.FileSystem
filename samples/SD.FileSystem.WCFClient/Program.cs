@@ -11,7 +11,7 @@ namespace SD.FileSystem.WCFClient
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //初始化依赖注入
             InitContainer();

@@ -11,7 +11,7 @@ namespace SD.FileSystem.WebApiClient
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //上传单文件
             UploadFile();
