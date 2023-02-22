@@ -20,6 +20,11 @@ namespace SD.FileSystem.AppService.Host
                     {
                         options.ListenAnyIP(httpPort);
                     }
+
+                    options.Limits.MaxRequestLineSize = short.MaxValue;
+                    options.Limits.MaxRequestBodySize = int.MaxValue;
+                    options.Limits.MaxRequestBufferSize = int.MaxValue;
+                    options.Limits.MaxResponseBufferSize = int.MaxValue;
                 });
                 foreach (int netTcpPort in AspNetSetting.NetTcpPorts)
                 {
