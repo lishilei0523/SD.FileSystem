@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Authors>Lee</Authors>
@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SD.IOC.Core" Version="2.1.6" />
-    <PackageReference Include="SD.IOC.Extension.NetCore.ServiceModel" Version="1.1.2" />
+    <PackageReference Include="SD.IOC.Core" Version="2.2.0" />
+    <PackageReference Include="SD.IOC.Extension.NetCore.ServiceModel" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
