@@ -1,6 +1,0 @@
-<service>
-  <id>SD.FileSystem.AppService(CoreWebApi)</id>
-  <name>SD.FileSystem.AppService(CoreWebApi)</name>
-  <description>文件管理系统CoreWebApi服务</description>
-  <executable>%BASE%\..\SD.FileSystem.AppService.Host.exe</executable>
-</service>

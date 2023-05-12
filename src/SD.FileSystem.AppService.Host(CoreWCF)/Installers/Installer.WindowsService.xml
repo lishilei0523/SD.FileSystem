@@ -1,6 +1,0 @@
-<service>
-  <id>SD.FileSystem.AppService(CoreWCF)</id>
-  <name>SD.FileSystem.AppService(CoreWCF)</name>
-  <description>文件管理系统CoreWCF服务</description>
-  <executable>%BASE%\..\SD.FileSystem.AppService.Host.exe</executable>
-</service>

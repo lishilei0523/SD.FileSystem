@@ -1,26 +1,44 @@
-﻿using SD.Infrastructure;
-using Topshelf;
+﻿using CoreWCF.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using SD.Toolkits.AspNet;
 
 namespace SD.FileSystem.AppService.Host
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main(string[] args)
         {
-            HostFactory.Run(config =>
-            {
-                config.Service<ServiceLauncher>(host =>
-                {
-                    host.ConstructUsing(name => new ServiceLauncher());
-                    host.WhenStarted(launcher => launcher.Start());
-                    host.WhenStopped(launcher => launcher.Stop());
-                });
-                config.RunAsLocalSystem();
+            IHostBuilder hostBuilder = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder();
 
-                config.SetServiceName(FrameworkSection.Setting.ServiceName.Value);
-                config.SetDisplayName(FrameworkSection.Setting.ServiceDisplayName.Value);
-                config.SetDescription(FrameworkSection.Setting.ServiceDescription.Value);
+            //WebHost配置
+            hostBuilder.ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseKestrel(options =>
+                {
+                    foreach (int httpPort in AspNetSetting.HttpPorts)
+                    {
+                        options.ListenAnyIP(httpPort);
+                    }
+
+                    options.Limits.MaxRequestLineSize = short.MaxValue;
+                    options.Limits.MaxRequestBodySize = int.MaxValue;
+                    options.Limits.MaxRequestBufferSize = int.MaxValue;
+                    options.Limits.MaxResponseBufferSize = int.MaxValue;
+                });
+                foreach (int netTcpPort in AspNetSetting.NetTcpPorts)
+                {
+                    webBuilder.UseNetTcp(netTcpPort);
+                }
+                webBuilder.UseStartup<Startup>();
             });
+
+            //依赖注入配置
+            ServiceLocator serviceLocator = new ServiceLocator();
+            hostBuilder.UseServiceProviderFactory(serviceLocator);
+
+            IHost host = hostBuilder.Build();
+            host.Run();
         }
     }
 }

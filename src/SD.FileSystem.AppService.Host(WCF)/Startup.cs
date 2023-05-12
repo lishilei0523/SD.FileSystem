@@ -1,31 +1,77 @@
-Ôªøusing Microsoft.Owin.FileSystems;
-using Microsoft.Owin.StaticFiles;
-using Owin;
+using CoreWCF.Configuration;
+using CoreWCF.Description;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using SD.Common;
+using SD.FileSystem.AppService.Implements;
+using SD.IdentitySystem.WCF.Authentication;
+using SD.Infrastructure.WCF.Server;
+using SD.IOC.Integration.WCF.Behaviors;
 using SD.Toolkits.AspNet;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 
 namespace SD.FileSystem.AppService.Host
 {
     /// <summary>
-    /// OWINÂêØÂä®Âô®
+    /// ”¶”√≥Ã–Ú∆Ù∂Ø∆˜
     /// </summary>
     public class Startup
     {
         /// <summary>
-        /// ÈÖçÁΩÆÂ∫îÁî®Á®ãÂ∫è
+        /// ≈‰÷√∑˛ŒÒ
         /// </summary>
-        /// <param name="appBuilder">Â∫îÁî®Á®ãÂ∫èÂª∫ÈÄ†ËÄÖ</param>
-        public void Configuration(IAppBuilder appBuilder)
+        public void ConfigureServices(IServiceCollection services)
         {
-            //ÈÖçÁΩÆÊñá‰ª∂ÊúçÂä°Âô®
+            //ÃÌº”WCF∑˛ŒÒ
+            services.AddServiceModelServices();
+            services.AddServiceModelMetadata();
+
+            //ÃÌº”WCF≈‰÷√
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            services.AddServiceModelConfigurationManagerFile(configuration.FilePath);
+        }
+
+        /// <summary>
+        /// ≈‰÷√”¶”√≥Ã–Ú
+        /// </summary>
+        public void Configure(IApplicationBuilder appBuilder)
+        {
+            //≈‰÷√WCF∑˛ŒÒ
+            ServiceMetadataBehavior metadataBehavior = appBuilder.ApplicationServices.GetRequiredService<ServiceMetadataBehavior>();
+            metadataBehavior.HttpGetEnabled = true;
+            metadataBehavior.HttpsGetEnabled = true;
+            UseRequestHeadersForMetadataAddressBehavior addressBehavior = new UseRequestHeadersForMetadataAddressBehavior();
+            DependencyInjectionBehavior dependencyInjectionBehavior = new DependencyInjectionBehavior();
+            InitializationBehavior initializationBehavior = new InitializationBehavior();
+            IList<IServiceBehavior> serviceBehaviors = new List<IServiceBehavior>
+            {
+                addressBehavior, dependencyInjectionBehavior, initializationBehavior
+            };
+
+            if (AspNetSetting.Authorized)
+            {
+                AuthenticationBehavior authenticationBehavior = new AuthenticationBehavior();
+                serviceBehaviors.Add(authenticationBehavior);
+            }
+
+            appBuilder.UseServiceModel(builder =>
+            {
+                builder.ConfigureServiceHostBase<FileContract>(host => host.Description.Behaviors.AddRange(serviceBehaviors));
+                builder.ConfigureServiceHostBase<LoadContract>(host => host.Description.Behaviors.AddRange(serviceBehaviors));
+            });
+
+            //≈‰÷√Œƒº˛∑˛ŒÒ∆˜
             string fileServerPath = Path.IsPathRooted(AspNetSetting.FileServerPath)
                 ? AspNetSetting.FileServerPath
-                : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AspNetSetting.FileServerPath);
+                : Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
             Directory.CreateDirectory(fileServerPath);
             FileServerOptions fileServerOptions = new FileServerOptions
             {
-                FileSystem = new PhysicalFileSystem(fileServerPath),
+                FileProvider = new PhysicalFileProvider(fileServerPath),
                 EnableDirectoryBrowsing = true
             };
             appBuilder.UseFileServer(fileServerOptions);

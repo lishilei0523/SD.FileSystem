@@ -1,17 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
-    <AssemblyName>SD.FileSystem.Repository</AssemblyName>
-    <RootNamespace>SD.FileSystem.Repository</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Copyright>Copyright © SD 2023</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
     <PackageReference Include="SD.Infrastructure" Version="3.5.7" />
-    <PackageReference Include="SD.Infrastructure.Repository.EntityFramework" Version="2.5.0" />
+    <PackageReference Include="SD.Infrastructure.Repository.EntityFrameworkCore" Version="2.5.0" />
     <PackageReference Include="SD.IdentitySystem.Membership" Version="4.2.0" />
   </ItemGroup>
 

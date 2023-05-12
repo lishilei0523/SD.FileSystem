@@ -1,19 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using CoreWCF;
 using SD.Common;
 using SD.FileSystem.Domain.IRepositories;
 using SD.FileSystem.IAppService.DTOs.Inputs;
 using SD.FileSystem.IAppService.DTOs.Outputs;
 using SD.FileSystem.IAppService.Interfaces;
 using SD.Toolkits.AspNet;
+using System;
+using System.IO;
+using System.Linq;
 using File = SD.FileSystem.Domain.Entities.File;
-#if NET40_OR_GREATER
-using System.ServiceModel;
-#endif
-#if NETSTANDARD2_0_OR_GREATER
-using CoreWCF;
-#endif
 
 namespace SD.FileSystem.AppService.Implements
 {

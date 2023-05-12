@@ -1,17 +1,16 @@
-﻿using SD.Common;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using SD.Common;
 using SD.FileSystem.AppService.Maps;
 using SD.FileSystem.Domain.IRepositories;
 using SD.Toolkits.AspNet;
-using SD.Toolkits.WebApi.Attributes;
-using SD.Toolkits.WebApi.Models;
+using SD.Toolkits.AspNetCore.Attributes;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Web.Http;
 using File = SD.FileSystem.Domain.Entities.File;
 using FileInfo = SD.FileSystem.IAppService.DTOs.Outputs.FileInfo;
 
@@ -20,7 +19,9 @@ namespace SD.FileSystem.AppService.Host.Controllers
     /// <summary>
     /// 文件上传/下载WebApi接口
     /// </summary>
-    public class LoadController : ApiController
+    [ApiController]
+    [Route("Api/[controller]/[action]")]
+    public class LoadController : Controller
     {
         #region # 字段及构造器
 
@@ -58,13 +59,14 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// <returns>文件</returns>
         [HttpPost]
         [FileParameters]
+        [DisableRequestSizeLimit]
         public FileInfo UploadFile(string use, string description, IFormFile formFile)
         {
             #region # 验证
 
-            if (!base.Request.Content.IsMimeMultipartContent())
+            if (!base.Request.ContentType.StartsWith("multipart/form-data"))
             {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                throw new HttpRequestException(HttpStatusCode.UnsupportedMediaType.ToString());
             }
             if (formFile == null)
             {
@@ -94,13 +96,14 @@ namespace SD.FileSystem.AppService.Host.Controllers
         /// <returns>文件列表</returns>
         [HttpPost]
         [FileParameters]
+        [DisableRequestSizeLimit]
         public IEnumerable<FileInfo> UploadFiles(string use, string description, IFormFileCollection formFiles)
         {
             #region # 验证
 
-            if (!base.Request.Content.IsMimeMultipartContent())
+            if (!base.Request.ContentType.StartsWith("multipart/form-data"))
             {
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                throw new HttpRequestException(HttpStatusCode.UnsupportedMediaType.ToString());
             }
             if (formFiles == null || !formFiles.Any())
             {
@@ -128,33 +131,20 @@ namespace SD.FileSystem.AppService.Host.Controllers
 
         //查询部分
 
-        #region # 下载文件 —— IHttpActionResult DownloadFile(Guid fileId)
+        #region # 下载文件 —— FileContentResult DownloadFile(Guid fileId)
         /// <summary>
         /// 下载文件
         /// </summary>
         /// <param name="fileId">文件Id</param>
         /// <returns>文件数据</returns>
         [HttpGet]
-        public IHttpActionResult DownloadFile(Guid fileId)
+        public FileContentResult DownloadFile(Guid fileId)
         {
             File file = this._fileRepository.Single(fileId);
             byte[] buffer = System.IO.File.ReadAllBytes(file.AbsolutePath);
-
             const string contentType = "application/octet-stream";
-            const string dispositionType = "attachment";
-            HttpContent httpContent = new ByteArrayContent(buffer);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-            httpContent.Headers.ContentDisposition = new ContentDispositionHeaderValue(dispositionType)
-            {
-                FileName = file.Name,
-                Size = file.Size
-            };
-            HttpResponseMessage httpResponse = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = httpContent
-            };
 
-            return base.ResponseMessage(httpResponse);
+            return base.File(buffer, contentType, file.Name);
         }
         #endregion
 
@@ -173,8 +163,16 @@ namespace SD.FileSystem.AppService.Host.Controllers
         {
             string fileName = formFile.FileName;
             string extensionName = Path.GetExtension(formFile.FileName);
-            long size = formFile.ContentLength;
-            string hashValue = formFile.Datas.ToMD5();
+            long size = formFile.Length;
+
+            byte[] fileBuffer;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                formFile.CopyTo(stream);
+                fileBuffer = stream.ToArray();
+            }
+
+            string hashValue = fileBuffer.ToMD5();
             DateTime uploadedDate = DateTime.Today;
             File file = new File(fileName, extensionName, size, hashValue, uploadedDate, use, description);
 
@@ -194,10 +192,10 @@ namespace SD.FileSystem.AppService.Host.Controllers
 
                 string relativePath = $"{uploadedDate.Year}/{uploadedDate.Month}/{uploadedDate.Day}/{file.Number}";
                 string absolutePath = $"{Path.GetFullPath(storageDirectory)}\\{file.Number}";
-                string hostName = $"http://{this.Request.RequestUri.Host}:{this.Request.RequestUri.Port}";
+                string hostName = $"http://{this.Request.Host.Host}:{this.Request.Host.Port}";
                 string fileUrl = $"{hostName}/{relativePath}";
 
-                System.IO.File.WriteAllBytes(absolutePath, formFile.Datas);
+                System.IO.File.WriteAllBytes(absolutePath, fileBuffer);
                 file.Save(relativePath, absolutePath, hostName, fileUrl);
             }
 

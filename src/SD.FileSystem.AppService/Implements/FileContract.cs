@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CoreWCF;
 using SD.FileSystem.AppService.Maps;
 using SD.FileSystem.Domain.Entities;
 using SD.FileSystem.Domain.IRepositories;
@@ -8,12 +6,9 @@ using SD.FileSystem.IAppService.DTOs.Inputs;
 using SD.FileSystem.IAppService.DTOs.Outputs;
 using SD.FileSystem.IAppService.Interfaces;
 using SD.Infrastructure.DTOBase;
-#if NET40_OR_GREATER
-using System.ServiceModel;
-#endif
-#if NETSTANDARD2_0_OR_GREATER
-using CoreWCF;
-#endif
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SD.FileSystem.AppService.Implements
 {

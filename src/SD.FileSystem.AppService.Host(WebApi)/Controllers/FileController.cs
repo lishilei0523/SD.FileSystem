@@ -1,18 +1,20 @@
-﻿using SD.FileSystem.IAppService.DTOs.Inputs;
+﻿using Microsoft.AspNetCore.Mvc;
+using SD.FileSystem.IAppService.DTOs.Inputs;
 using SD.FileSystem.IAppService.DTOs.Outputs;
 using SD.FileSystem.IAppService.Interfaces;
 using SD.Infrastructure.DTOBase;
-using SD.Toolkits.WebApi.Attributes;
+using SD.Toolkits.AspNetCore.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Web.Http;
 
 namespace SD.FileSystem.AppService.Host.Controllers
 {
     /// <summary>
     /// 文件管理WebApi接口
     /// </summary>
-    public class FileController : ApiController
+    [ApiController]
+    [Route("Api/[controller]/[action]")]
+    public class FileController : ControllerBase
     {
         #region # 字段及构造器
 
