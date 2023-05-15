@@ -4,9 +4,9 @@ using SD.Toolkits.AspNet;
 
 namespace SD.FileSystem.WebClient
 {
-    public class Program
+    class Program
     {
-        public static void Main()
+        static void Main()
         {
             IHostBuilder hostBuilder = Host.CreateDefaultBuilder();
 
