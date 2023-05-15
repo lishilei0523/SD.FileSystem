@@ -18,7 +18,7 @@ namespace SD.FileSystem.AppService.Implements
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, IncludeExceptionDetailInFaults = true)]
     public class LoadContract : ILoadContract
     {
-        #region # 字段及依赖注入构造器
+        #region # 字段及构造器
 
         /// <summary>
         /// 文件仓储接口
