@@ -21,8 +21,12 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+  <ItemGroup Condition="$(TargetFramework.Equals('netstandard2.0'))">
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.10.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Equals('net6.0'))">
+    <PackageReference Include="System.ServiceModel.Primitives" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

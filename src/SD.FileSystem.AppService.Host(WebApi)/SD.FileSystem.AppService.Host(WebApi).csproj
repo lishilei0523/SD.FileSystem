@@ -22,10 +22,7 @@
 
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="Content\favicon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Index.html">
+    <Content Include="Content\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
