@@ -35,10 +35,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CoreWCF.Primitives" Version="1.4.1" />
-    <PackageReference Include="CoreWCF.Http" Version="1.4.1" />
-    <PackageReference Include="CoreWCF.NetTcp" Version="1.4.1" />
-    <PackageReference Include="CoreWCF.ConfigurationManager" Version="1.4.1">
+    <PackageReference Include="CoreWCF.Primitives" Version="1.5.1" />
+    <PackageReference Include="CoreWCF.Http" Version="1.5.1" />
+    <PackageReference Include="CoreWCF.NetTcp" Version="1.5.1" />
+    <PackageReference Include="CoreWCF.ConfigurationManager" Version="1.5.1">
       <ExcludeAssets Condition="'$(Configuration)'=='Debug'">contentFiles</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="SD.Toolkits.AspNet" Version="1.1.3" />
