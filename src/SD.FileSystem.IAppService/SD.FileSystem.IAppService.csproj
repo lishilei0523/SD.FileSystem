@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net40;net45;netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <Authors>Lee</Authors>
     <Company>SD</Company>
     <Description>SD.FileSystem 文件管理系统服务接口</Description>
-    <Copyright>Copyright © SD 2023</Copyright>
+    <Copyright>Copyright © SD 2024</Copyright>
     <Version>2.1.0</Version>
     <AssemblyVersion>2.1.0</AssemblyVersion>
     <FileVersion>2.1.0.0</FileVersion>
@@ -29,7 +29,11 @@
     <PackageReference Include="System.ServiceModel.Primitives" Version="6.2.0" />
   </ItemGroup>
 
+  <ItemGroup Condition="$(TargetFramework.Equals('net8.0'))">
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="SD.Infrastructure" Version="3.5.8" />
+    <PackageReference Include="SD.Infrastructure" Version="3.6.0" />
   </ItemGroup>
 </Project>
