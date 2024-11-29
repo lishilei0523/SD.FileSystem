@@ -6,7 +6,7 @@ namespace SD.FileSystem.IAppService.DTOs.Inputs
     /// <summary>
     /// 文件参数模型
     /// </summary>
-    [DataContract(Name = "http://SD.FileSystem.IAppService.DTOs.Inputs")]
+    [DataContract]
     public struct FileParam
     {
         /// <summary>

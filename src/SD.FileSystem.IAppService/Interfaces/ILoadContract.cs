@@ -8,7 +8,7 @@ namespace SD.FileSystem.IAppService.Interfaces
     /// <summary>
     /// 文件上传/下载服务契约接口
     /// </summary>
-    [ServiceContract(Namespace = "http://SD.FileSystem.IAppService.Interfaces")]
+    [ServiceContract]
     public interface ILoadContract : IApplicationService
     {
         //命令部分

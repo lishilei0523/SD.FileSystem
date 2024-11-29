@@ -7,7 +7,7 @@ namespace SD.FileSystem.IAppService.DTOs.Outputs
     /// <summary>
     /// 文件数据传输对象
     /// </summary>
-    [DataContract(Namespace = "http://SD.FileSystem.IAppService.DTOs.Outputs")]
+    [DataContract]
     public class FileInfo : BaseDTO
     {
         #region 扩展名 —— string ExtensionName

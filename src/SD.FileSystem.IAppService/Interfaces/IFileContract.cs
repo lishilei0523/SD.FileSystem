@@ -11,7 +11,7 @@ namespace SD.FileSystem.IAppService.Interfaces
     /// <summary>
     /// 文件管理服务契约接口
     /// </summary>
-    [ServiceContract(Namespace = "http://SD.FileSystem.IAppService.Interfaces")]
+    [ServiceContract]
     public interface IFileContract : IApplicationService
     {
         //命令部分

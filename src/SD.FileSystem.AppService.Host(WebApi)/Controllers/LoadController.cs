@@ -64,7 +64,7 @@ namespace SD.FileSystem.AppService.Host.Controllers
         {
             #region # 验证
 
-            if (!base.Request.ContentType.StartsWith("multipart/form-data"))
+            if (!base.Request.ContentType!.StartsWith("multipart/form-data"))
             {
                 throw new HttpRequestException(HttpStatusCode.UnsupportedMediaType.ToString());
             }
@@ -101,7 +101,7 @@ namespace SD.FileSystem.AppService.Host.Controllers
         {
             #region # 验证
 
-            if (!base.Request.ContentType.StartsWith("multipart/form-data"))
+            if (!base.Request.ContentType!.StartsWith("multipart/form-data"))
             {
                 throw new HttpRequestException(HttpStatusCode.UnsupportedMediaType.ToString());
             }
@@ -165,12 +165,9 @@ namespace SD.FileSystem.AppService.Host.Controllers
             string extensionName = Path.GetExtension(formFile.FileName);
             long size = formFile.Length;
 
-            byte[] fileBuffer;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                formFile.CopyTo(stream);
-                fileBuffer = stream.ToArray();
-            }
+            using MemoryStream stream = new MemoryStream();
+            formFile.CopyTo(stream);
+            byte[] fileBuffer = stream.ToArray();
 
             string hashValue = fileBuffer.ToMD5();
             DateTime uploadedDate = DateTime.Today;
@@ -187,7 +184,7 @@ namespace SD.FileSystem.AppService.Host.Controllers
                 string fileServerPath = Path.IsPathRooted(AspNetSetting.FileServerPath)
                     ? AspNetSetting.FileServerPath
                     : Path.Combine(AppContext.BaseDirectory, AspNetSetting.FileServerPath);
-                string storageDirectory = $"{fileServerPath}\\{uploadedDate.Year}\\{uploadedDate.Month}\\{uploadedDate.Day}";
+                string storageDirectory = $@"{fileServerPath}\{uploadedDate.Year}\{uploadedDate.Month}\{uploadedDate.Day}";
                 Directory.CreateDirectory(storageDirectory);
 
                 string relativePath = $"{uploadedDate.Year}/{uploadedDate.Month}/{uploadedDate.Day}/{file.Number}";
