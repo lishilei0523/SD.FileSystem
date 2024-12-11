@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="CoreWCF.Primitives" Version="1.6.0" />
-    <PackageReference Include="SD.Common" Version="3.3.0" />
+    <PackageReference Include="SD.Common" Version="3.4.0" />
     <PackageReference Include="SD.Toolkits.AspNet" Version="1.2.0" />
     <PackageReference Include="SD.Toolkits.Mapper" Version="1.2.0" />
     <PackageReference Include="SD.CacheManager" Version="2.2.0" />

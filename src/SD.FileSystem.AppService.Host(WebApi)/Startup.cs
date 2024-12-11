@@ -3,17 +3,17 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using SD.IdentitySystem.AspNetCore.Authentication.Filters;
 using SD.Infrastructure.AspNetCore.Server.Middlewares;
 using SD.Infrastructure.Constants;
 using SD.Toolkits.AspNet;
 using SD.Toolkits.AspNetCore.Filters;
-using SD.Toolkits.OwinCore.Middlewares;
+using SD.Toolkits.AspNetCore.Middlewares;
+using SD.Toolkits.Json;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text.Json;
 
 namespace SD.FileSystem.AppService.Host
 {
@@ -28,7 +28,7 @@ namespace SD.FileSystem.AppService.Host
         public void ConfigureServices(IServiceCollection services)
         {
             //添加跨域策略
-            services.AddCors(options => options.AddPolicy(typeof(Startup).FullName,
+            services.AddCors(options => options.AddPolicy(typeof(Startup).FullName!,
                 policyBuilder =>
                 {
                     policyBuilder.AllowAnyMethod();
@@ -58,17 +58,14 @@ namespace SD.FileSystem.AppService.Host
             {
                 options.Filters.Add<WebApiAuthenticationFilter>();
                 options.Filters.Add<WebApiExceptionFilter>();
-            }).AddNewtonsoftJson(options =>
+            }).AddJsonOptions(options =>
             {
                 //Camel命名设置
-                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 
                 //日期时间格式设置
-                IsoDateTimeConverter dateTimeConverter = new IsoDateTimeConverter()
-                {
-                    DateTimeFormat = CommonConstants.DateTimeFormat
-                };
-                options.SerializerSettings.Converters.Add(dateTimeConverter);
+                DateTimeConverter dateTimeConverter = new DateTimeConverter(CommonConstants.DateTimeFormat);
+                options.JsonSerializerOptions.Converters.Add(dateTimeConverter);
             });
 
             //表单设置
@@ -88,7 +85,7 @@ namespace SD.FileSystem.AppService.Host
             appBuilder.UseMiddleware<CacheOwinContextMiddleware>();
 
             //配置跨域
-            appBuilder.UseCors(typeof(Startup).FullName);
+            appBuilder.UseCors(typeof(Startup).FullName!);
 
             //配置Swagger
             appBuilder.UseSwagger();
