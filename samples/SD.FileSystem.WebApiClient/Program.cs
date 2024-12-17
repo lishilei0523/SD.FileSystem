@@ -29,7 +29,7 @@ namespace SD.FileSystem.WebApiClient
         {
             string filePath = CreateFile();
             string fileName = Path.GetFileName(filePath);
-            using FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read)
+            using FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             byte[] buffer = new byte[stream.Length];
             stream.Read(buffer, 0, buffer.Length);
 
