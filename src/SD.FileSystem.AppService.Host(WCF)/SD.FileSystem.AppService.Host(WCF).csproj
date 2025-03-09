@@ -26,14 +26,14 @@
 
   <ItemGroup>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CoreWCF.Primitives" Version="1.6.0" />
-    <PackageReference Include="CoreWCF.Http" Version="1.6.0" />
-    <PackageReference Include="CoreWCF.NetTcp" Version="1.6.0" />
-    <PackageReference Include="CoreWCF.ConfigurationManager" Version="1.6.0">
+    <PackageReference Include="CoreWCF.Primitives" Version="1.7.0" />
+    <PackageReference Include="CoreWCF.Http" Version="1.7.0" />
+    <PackageReference Include="CoreWCF.NetTcp" Version="1.7.0" />
+    <PackageReference Include="CoreWCF.ConfigurationManager" Version="1.7.0">
       <ExcludeAssets Condition="'$(Configuration)'=='Debug'">contentFiles</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="SD.Toolkits.AspNet" Version="1.2.0" />
@@ -43,7 +43,7 @@
     <PackageReference Include="SD.IOC.Integration.WCF" Version="2.3.0" />
     <PackageReference Include="SD.CacheManager" Version="2.2.0" />
     <PackageReference Include="SD.CacheManager.Redis" Version="2.3.0" />
-    <PackageReference Include="SD.Infrastructure" Version="3.7.7" />
+    <PackageReference Include="SD.Infrastructure" Version="3.8.1" />
     <PackageReference Include="SD.Infrastructure.Global" Version="2.2.0" />
     <PackageReference Include="SD.Infrastructure.WCF.Server" Version="2.2.0" />
     <PackageReference Include="SD.IdentitySystem.Membership" Version="4.3.0" />
