@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using SD.IdentitySystem.AspNetCore.Authentication.Filters;
 using SD.Infrastructure.AspNetCore.Server.Middlewares;
 using SD.Infrastructure.Constants;

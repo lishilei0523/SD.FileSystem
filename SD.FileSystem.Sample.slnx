@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/00 - Interfaces/">
+    <Project Path="src/SD.FileSystem.IAppService/SD.FileSystem.IAppService.csproj" />
+  </Folder>
+  <Folder Name="/01 - Clients/">
+    <Project Path="samples/SD.FileSystem.WCFClient/SD.FileSystem.WCFClient.csproj" />
+    <Project Path="samples/SD.FileSystem.WebApiClient/SD.FileSystem.WebApiClient.csproj" />
+    <Project Path="samples/SD.FileSystem.WebClient/SD.FileSystem.WebClient.csproj" />
+  </Folder>
+</Solution>

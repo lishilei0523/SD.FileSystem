@@ -1,26 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net462;net6.0;net8.0</TargetFrameworks>
-    <Authors>Lee</Authors>
-    <Company>SD</Company>
+    <TargetFrameworks>net462;net8.0</TargetFrameworks>
     <Description>SD.FileSystem 文件管理系统服务接口</Description>
-    <Copyright>Copyright © SD 2024</Copyright>
-    <Version>2.2.0</Version>
-    <AssemblyVersion>2.2.0</AssemblyVersion>
-    <FileVersion>2.2.0.0</FileVersion>
   </PropertyGroup>
 
+  <!--NuGet-->
   <PropertyGroup>
-    <BaseOutputPath>bin\</BaseOutputPath>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.Equals('net462'))">
     <Reference Include="System.ServiceModel" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.Equals('net6.0'))">
-    <PackageReference Include="System.ServiceModel.Primitives" Version="6.2.0" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Equals('net8.0'))">
@@ -28,6 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SD.Infrastructure" Version="3.8.2" />
+    <PackageReference Include="SD.Infrastructure" Version="3.8.3" />
   </ItemGroup>
 </Project>

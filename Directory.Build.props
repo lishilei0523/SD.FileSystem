@@ -1,0 +1,37 @@
+<Project DefaultTargets="Build">
+  <PropertyGroup>
+    <LangVersion>Latest</LangVersion>
+    <BaseOutputPath>bin\</BaseOutputPath>
+    <NoDefaultLaunchSettingsFile>True</NoDefaultLaunchSettingsFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!--Version-->
+  <PropertyGroup>
+    <Version>2.3.0</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <Authors>Lee</Authors>
+    <Company>SD</Company>
+    <Copyright>Copyright © SD $([System.DateTime]::Now.ToString(yyyy))</Copyright>
+  </PropertyGroup>
+
+  <!--NuGet-->
+  <PropertyGroup>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageOutputPath>$(SolutionDir)\packages</PackageOutputPath>
+  </PropertyGroup>
+
+  <!--NuGet-->
+  <ItemGroup>
+    <None Include="$(SolutionDir)\assets\favicon.png">
+      <Pack>True</Pack>
+      <PackagePath>Icon.png</PackagePath>
+      <Visible>False</Visible>
+    </None>
+    <None Include="*.config.transform">
+      <Pack>True</Pack>
+      <PackagePath>content\</PackagePath>
+    </None>
+  </ItemGroup>
+</Project>
