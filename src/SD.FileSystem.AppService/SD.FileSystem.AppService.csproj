@@ -5,11 +5,11 @@
 
   <ItemGroup>
     <PackageReference Include="CoreWCF.Primitives" Version="1.8.0" />
-    <PackageReference Include="SD.Common" Version="3.4.1" />
-    <PackageReference Include="SD.Toolkits.AspNet" Version="1.2.1" />
-    <PackageReference Include="SD.Toolkits.Mapper" Version="1.2.1" />
-    <PackageReference Include="SD.CacheManager" Version="2.3.1" />
-    <PackageReference Include="SD.Infrastructure" Version="3.8.3" />
+    <PackageReference Include="SD.Common" Version="4.0.0" />
+    <PackageReference Include="SD.Toolkits.AspNet" Version="4.0.0" />
+    <PackageReference Include="SD.Toolkits.Mapper" Version="4.0.0" />
+    <PackageReference Include="SD.CacheManager" Version="3.0.0" />
+    <PackageReference Include="SD.Infrastructure" Version="4.0.0" />
     <PackageReference Include="SD.IdentitySystem.Membership" Version="4.3.1" />
   </ItemGroup>
 
