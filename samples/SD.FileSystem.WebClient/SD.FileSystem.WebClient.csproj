@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SD.Toolkits.AspNet" Version="4.0.0" />
+    <PackageReference Include="SD.Toolkits.AspNet" Version="4.0.2" />
   </ItemGroup>
 </Project>
